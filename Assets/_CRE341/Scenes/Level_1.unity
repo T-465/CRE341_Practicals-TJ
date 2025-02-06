@@ -313,8 +313,8 @@ MonoBehaviour:
   height: 128
   seed: 0
   useRandomSeed: 1
-  randomFillPercent: 50
-  numberOfNPCs: 5
+  randomFillPercent: 58
+  numberOfNPCs: 13
   npcs: []
   numberWaypoints: 4
   waypoints: []
