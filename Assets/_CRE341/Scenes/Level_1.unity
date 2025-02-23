@@ -465,9 +465,9 @@ MonoBehaviour:
   groundObject: {fileID: 631091595}
   width: 128
   height: 128
-  seed: 0
+  seed: 
   useRandomSeed: 1
-  randomFillPercent: 58
+  randomFillPercent: 50
   numberOfNPCs: 13
   npcs: []
   numberWaypoints: 4
@@ -618,7 +618,7 @@ Transform:
   m_GameObject: {fileID: 631091595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 12.8, y: 1, z: 12.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1036,7 +1036,7 @@ Transform:
   m_GameObject: {fileID: 777526921}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1790,7 +1790,7 @@ Transform:
   m_GameObject: {fileID: 1178072015}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.6185, y: 11.282, z: 141.6656}
+  m_LocalPosition: {x: 29.6185, y: 15, z: 141.6656}
   m_LocalScale: {x: 13.518408, y: 1, z: 11.155199}
   m_ConstrainProportionsScale: 0
   m_Children: []
