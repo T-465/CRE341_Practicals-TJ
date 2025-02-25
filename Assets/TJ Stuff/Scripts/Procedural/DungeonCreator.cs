@@ -30,7 +30,7 @@ public class DungeonCreator : MonoBehaviour
     public void CreateDungeon()
     {
         DestroyAllChildren();
-        DugeonGenerator generator = new DugeonGenerator(dungeonWidth, dungeonLength);
+        DungeonGen generator = new DungeonGen(dungeonWidth, dungeonLength);
         var listOfRooms = generator.CalculateDungeon(maxIterations,
             roomWidthMin,
             roomLengthMin,

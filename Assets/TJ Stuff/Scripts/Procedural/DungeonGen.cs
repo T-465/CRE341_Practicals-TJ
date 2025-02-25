@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public class DugeonGenerator
+public class DungeonGen
 {
     
     List<RoomNode> allNodesCollection = new List<RoomNode>();
     private int dungeonWidth;
     private int dungeonLength;
 
-    public DugeonGenerator(int dungeonWidth, int dungeonLength)
+    public DungeonGen(int dungeonWidth, int dungeonLength)
     {
         this.dungeonWidth = dungeonWidth;
         this.dungeonLength = dungeonLength;

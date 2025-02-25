@@ -7,7 +7,7 @@ public abstract class Node
 
     public List<Node> ChildrenNodeList { get => childrenNodeList;}
 
-    public bool Visted { get; set; }
+    public bool Visited { get; set; }
     public Vector2Int BottomLeftAreaCorner { get; set; }
     public Vector2Int BottomRightAreaCorner { get; set; }
     public Vector2Int TopRightAreaCorner { get; set; }
