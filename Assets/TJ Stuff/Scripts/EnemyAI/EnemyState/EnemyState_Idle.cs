@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyState_Tele : IEnemyState
+public class EnemyState_Idle : IEnemyState
 {
    
 
     public void Enter(AIBase aiBase)
     {
-        Debug.Log("Entering Tele State");
+        Debug.Log("Entering Idle State");
 
     }
 
@@ -25,7 +25,7 @@ public class EnemyState_Tele : IEnemyState
             aiBase.SetState(new EnemyState_Chase());
         }
 
-        Debug.Log("AITele");
+        Debug.Log("AIIdle");
     }
 
     public void Exit(AIBase aIBase)

@@ -24,12 +24,6 @@ public class AIBase : MonoBehaviour
 
 
 
-
-
-
-
-
-
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
@@ -41,12 +35,12 @@ public class AIBase : MonoBehaviour
     private void Start()
     {
 
-        SetState(new EnemyState_Tele());
+        SetState(new EnemyState_Idle());
         Invoke("LocatePlayer", 1f);
     }
     private void OnEnable()
     {
-        SetState(new EnemyState_Tele());
+        SetState(new EnemyState_Idle());
 
     }
     private void OnDisable()

@@ -23,7 +23,7 @@ public class EnemyState_Chase :  IEnemyState
 
         if (Input.GetKey(KeyCode.Space))
         {
-            aiBase.SetState(new EnemyState_Tele());
+            aiBase.SetState(new EnemyState_Idle());
         }
 
     }
