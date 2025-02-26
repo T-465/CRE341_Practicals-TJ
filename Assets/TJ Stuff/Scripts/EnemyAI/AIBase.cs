@@ -35,12 +35,12 @@ public class AIBase : MonoBehaviour
     private void Start()
     {
 
-        SetState(new EnemyState_Idle());
+        SetState(new EnemyState_Chase());
         Invoke("LocatePlayer", 1f);
     }
     private void OnEnable()
     {
-        SetState(new EnemyState_Idle());
+        SetState(new EnemyState_Chase());
 
     }
     private void OnDisable()

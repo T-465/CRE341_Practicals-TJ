@@ -17,6 +17,16 @@ public class DungeonCreator : MonoBehaviour
     [Range(0, 2)]
     public int roomOffset;
     public GameObject wallVertical, wallHorizontal;
+
+    #region NPCSpawning
+    public GameObject npcPrefab, waypointsPrefab;
+    [SerializeField] int numberOfNPCs = 5;
+	[SerializeField] List<GameObject> npcs = new List<GameObject>();
+	[SerializeField] int numberWaypoints = 4;
+	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
+
+    #endregion
+
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -49,7 +59,21 @@ public class DungeonCreator : MonoBehaviour
             CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
         }
         CreateWalls(wallParent);
+        SpawnNPCs();
     }
+    private void SpawnNPCs()
+{
+    for (int i = 0; i < numberOfNPCs; i++)
+    {
+        Vector3 randomPosition = new Vector3(
+            UnityEngine.Random.Range(0, dungeonWidth),
+            0,
+            UnityEngine.Random.Range(0, dungeonLength)
+        );
+        GameObject npc = Instantiate(npcPrefab, randomPosition, Quaternion.identity);
+        npcs.Add(npc);
+    }
+}
 
     private void CreateWalls(GameObject wallParent)
     {

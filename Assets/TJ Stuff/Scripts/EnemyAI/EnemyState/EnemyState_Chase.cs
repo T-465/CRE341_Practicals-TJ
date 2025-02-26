@@ -10,7 +10,7 @@ public class EnemyState_Chase :  IEnemyState
     public void Enter(AIBase aiBase)
     {
         Debug.Log("Entering Chase State");
-        aiBase.agent.speed = 15;
+        aiBase.agent.speed = 5;
     }
     public void Update(AIBase aiBase)
     {
