@@ -66,9 +66,9 @@ public class DungeonCreator : MonoBehaviour
     for (int i = 0; i < numberOfNPCs; i++)
     {
         Vector3 randomPosition = new Vector3(
-            UnityEngine.Random.Range(0, dungeonWidth),
+            UnityEngine.Random.Range(0, dungeonWidth ),
             0,
-            UnityEngine.Random.Range(0, dungeonLength)
+            UnityEngine.Random.Range(0, dungeonLength )
         );
         GameObject npc = Instantiate(npcPrefab, randomPosition, Quaternion.identity);
         npcs.Add(npc);
