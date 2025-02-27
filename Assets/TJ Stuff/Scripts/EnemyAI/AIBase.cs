@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 
 
 public class AIBase : MonoBehaviour
@@ -20,8 +21,8 @@ public class AIBase : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-
-
+    public float killcountdown = 2;
+    public bool isDying;
 
 
     private void Awake()
@@ -53,6 +54,23 @@ public class AIBase : MonoBehaviour
     {
         currentState?.Update(this);
 
+        if (killcountdown >= 2)
+        {
+            killcountdown = 2;
+        }
+        if (isDying)
+        {
+            killcountdown -= Time.deltaTime;
+        }
+        if (!isDying && killcountdown < 2)
+        {
+            killcountdown += Time.deltaTime;
+        }
+
+if (killcountdown <= 0)
+        {
+            SetState(new EnemyState_Dead());
+        }
     }
     public void SetState(IEnemyState newState)
     {
@@ -72,6 +90,23 @@ public class AIBase : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
+    }
 
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Flashlight")
+        {
+            isDying = true;
+        }
+    }
+        public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Flashlight")
+        {
+            killcountdown = 0.5f;
+            isDying = false;
+            
+        }
     }
 }
