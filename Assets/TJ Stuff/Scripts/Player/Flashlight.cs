@@ -36,13 +36,13 @@ public class Flashlight : MonoBehaviour, ISwitchable
             flashlighton = false;
         }
 
-    /*
+    
         if (countdown >= 15)
         {
             countdown = 15;
 
         }
-        */
+        
         if (Input.GetMouseButtonDown(0))
         {
             Toggle();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class DungeonCreator : MonoBehaviour
@@ -22,21 +23,23 @@ public class DungeonCreator : MonoBehaviour
     public GameObject npcPrefab, waypointsPrefab;
     [SerializeField] int numberOfNPCs = 5;
 	[SerializeField] List<GameObject> npcs = new List<GameObject>();
+    /*
 	[SerializeField] int numberWaypoints = 4;
 	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
-
+*/
     #endregion
 
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
+
+    public NavMeshSurface navMeshSurface;
     // Start is called before the first frame update
     void Start()
     {
         CreateDungeon();
     }
-
     public void CreateDungeon()
     {
         DestroyAllChildren();
@@ -59,7 +62,11 @@ public class DungeonCreator : MonoBehaviour
             CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
         }
         CreateWalls(wallParent);
+
+        DestroyNPCS();
+        navMeshSurface.BuildNavMesh();
         SpawnNPCs();
+       
     }
     private void SpawnNPCs()
 {
@@ -73,8 +80,17 @@ public class DungeonCreator : MonoBehaviour
         GameObject npc = Instantiate(npcPrefab, randomPosition, Quaternion.identity);
         npcs.Add(npc);
     }
+   
 }
 
+ private void DestroyNPCS()
+    {
+        foreach (var npc in npcs)
+        {
+            Destroy(npc);
+        }
+        npcs.Clear();
+    }
     private void CreateWalls(GameObject wallParent)
     {
         foreach (var wallPosition in possibleWallHorizontalPosition)
