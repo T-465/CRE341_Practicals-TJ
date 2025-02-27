@@ -10,7 +10,7 @@ public class Flashlight : MonoBehaviour, ISwitchable
     public GameObject volumebeam;
     public Light FlashLight;
    
-    public float countdown = 10;
+    public float countdown = 2;
     public bool flashlighton;
     public bool flashlightfull;
     public bool flashlightdead;
@@ -37,16 +37,17 @@ public class Flashlight : MonoBehaviour, ISwitchable
         }
 
     
-        if (countdown >= 15)
+        if (countdown >= 2)
         {
-            countdown = 15;
+            countdown = 2;
 
         }
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && flashlightfull == true)
         {
             Toggle();
         }
+
         
         if (FlashLight.enabled == true)
         {
@@ -61,32 +62,24 @@ public class Flashlight : MonoBehaviour, ISwitchable
             {
                 yield return new WaitForSeconds(4);
                 countdown += Time.deltaTime;
+                yield return new WaitUntil(() => countdown >= 2);
+                countdown -= Time.deltaTime;
             }
         }
-        if (countdown >= 11)
+        if (countdown >= 2)
         {
       
             flashlightfull = true;
-
-        }
-
-        if (countdown <= 8 && countdown >= 5)
-        {
-
-            flashlightfull = false;
-     
-        }
-        if (countdown <= 5 && countdown >= 0)
-        {
-
             flashlightdead = false;
 
         }
-        if (countdown <= 0)
+
+        if (countdown == 0 || countdown < 1)
         {
            volumebeam.SetActive(false);
             FlashLight.enabled = false;
             flashlightdead = true;
+            flashlightfull = false;
         }
         #endregion
     }
@@ -96,4 +89,5 @@ public class Flashlight : MonoBehaviour, ISwitchable
      // click.Play();
       FlashLight.enabled = !FlashLight.enabled;
     }
+
 }
