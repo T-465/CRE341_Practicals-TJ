@@ -23,12 +23,16 @@ public class DungeonCreator : MonoBehaviour
     public GameObject npcPrefab, waypointsPrefab;
     [SerializeField] int numberOfNPCs = 5;
 	[SerializeField] List<GameObject> npcs = new List<GameObject>();
+    [SerializeField] List<GameObject> npcPrefabs = new List<GameObject>();
     /*
 	[SerializeField] int numberWaypoints = 4;
 	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
 */
     #endregion
 
+    [SerializeField] int numberOfProps = 10;
+    [SerializeField] List<GameObject> props = new List<GameObject>();
+    [SerializeField] List<GameObject> propPrefabs = new List<GameObject>();
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -66,21 +70,47 @@ public class DungeonCreator : MonoBehaviour
         DestroyNPCS();
         navMeshSurface.BuildNavMesh();
         SpawnNPCs();
-       
+        DestroyProps();
+        SpawnProps();
     }
     private void SpawnNPCs()
 {
     for (int i = 0; i < numberOfNPCs; i++)
     {
         Vector3 randomPosition = new Vector3(
-            UnityEngine.Random.Range(0, dungeonWidth ),
+            UnityEngine.Random.Range(0, dungeonWidth),
             0,
-            UnityEngine.Random.Range(0, dungeonLength )
+            UnityEngine.Random.Range(0, dungeonLength)
         );
-        GameObject npc = Instantiate(npcPrefab, randomPosition, Quaternion.identity);
+        GameObject randomNpcPrefab = npcPrefabs[UnityEngine.Random.Range(0, npcPrefabs.Count)];
+        GameObject npc = Instantiate(randomNpcPrefab, randomPosition, Quaternion.identity);
         npcs.Add(npc);
     }
    
+}
+
+private void SpawnProps()
+{
+    for (int i = 0; i < numberOfProps; i++)
+    {
+        Vector3 randomPosition = new Vector3(
+            UnityEngine.Random.Range(0, dungeonWidth),
+            0,
+            UnityEngine.Random.Range(0, dungeonLength)
+        );
+        GameObject randomPropPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
+        GameObject prop = Instantiate(randomPropPrefab, randomPosition, Quaternion.identity);
+        props.Add(prop);
+    }
+}
+
+private void DestroyProps()
+{
+    foreach (var prop in props)
+    {
+        Destroy(prop);
+    }
+    props.Clear();
 }
 
  private void DestroyNPCS()
