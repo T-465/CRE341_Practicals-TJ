@@ -201,6 +201,8 @@ private void DestroyProps()
             var wallPosition = new Vector3(bottomRightV.x, 0, col);
             AddWallPositionToList(wallPosition, possibleWallVerticalPosition, possibleDoorVerticalPosition);
         }
+        MeshCollider meshCollider = dungeonFloor.AddComponent<MeshCollider>();
+        print(mesh.isReadable);
     }
 
     private void AddWallPositionToList(Vector3 wallPosition, List<Vector3Int> wallList, List<Vector3Int> doorList)
