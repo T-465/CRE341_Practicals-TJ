@@ -117,7 +117,7 @@ private void SpawnHatch()
             0,
             UnityEngine.Random.Range(0, dungeonLength)
         );
-        GameObject randomHatchPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
+        GameObject randomHatchPrefab = hatchPrefabs[UnityEngine.Random.Range(0, hatchPrefabs.Count)];
         GameObject hatch = Instantiate(randomHatchPrefab, randomPosition, Quaternion.identity);
         hatches.Add(hatch);
     }
