@@ -33,6 +33,9 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] int numberOfProps = 10;
     [SerializeField] List<GameObject> props = new List<GameObject>();
     [SerializeField] List<GameObject> propPrefabs = new List<GameObject>();
+       [SerializeField] int numberOfHatches = 10;
+    [SerializeField] List<GameObject> hatches = new List<GameObject>();
+    [SerializeField] List<GameObject> hatchPrefabs = new List<GameObject>();
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -68,10 +71,12 @@ public class DungeonCreator : MonoBehaviour
         CreateWalls(wallParent);
 
         DestroyNPCS();
+        DestroyHatch();
+        DestroyProps();
         navMeshSurface.BuildNavMesh();
         SpawnNPCs();
-        DestroyProps();
         SpawnProps();
+        SpawnHatch();
     }
     private void SpawnNPCs()
 {
@@ -103,6 +108,20 @@ private void SpawnProps()
         props.Add(prop);
     }
 }
+private void SpawnHatch()
+{
+    for (int i = 0; i < numberOfHatches; i++)
+    {
+        Vector3 randomPosition = new Vector3(
+            UnityEngine.Random.Range(0, dungeonWidth),
+            0,
+            UnityEngine.Random.Range(0, dungeonLength)
+        );
+        GameObject randomHatchPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
+        GameObject hatch = Instantiate(randomHatchPrefab, randomPosition, Quaternion.identity);
+        hatches.Add(hatch);
+    }
+}
 
 private void DestroyProps()
 {
@@ -111,6 +130,15 @@ private void DestroyProps()
         Destroy(prop);
     }
     props.Clear();
+}
+private void DestroyHatch()
+{
+    foreach (var hatch in hatches)
+    {
+        Destroy(hatch);
+    }
+
+    hatches.Clear();
 }
 
  private void DestroyNPCS()

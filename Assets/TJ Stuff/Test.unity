@@ -38107,6 +38107,10 @@ MonoBehaviour:
   - {fileID: 2676900323879703253, guid: 1e8c20d1136dacc4799590d2d9b210a6, type: 3}
   - {fileID: 4194682928321090313, guid: 310ec8c18f709b24391329893cf1f9df, type: 3}
   - {fileID: 2458606861065807219, guid: 60da911873d56dd4abb6732f3ccdc0aa, type: 3}
+  numberOfHatches: 1
+  hatches: []
+  hatchPrefabs:
+  - {fileID: 7557005521531737924, guid: fc529c35afab78a4fa517a9cbad065e1, type: 3}
   navMeshSurface: {fileID: 1300908049}
 --- !u!4 &1283770223
 Transform:
