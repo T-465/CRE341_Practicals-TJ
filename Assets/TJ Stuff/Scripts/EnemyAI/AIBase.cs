@@ -14,7 +14,6 @@ public class AIBase : MonoBehaviour
 
     public NavMeshAgent agent;
 
-
     private IEnemyState currentState;
     public Transform player;
 
@@ -24,13 +23,15 @@ public class AIBase : MonoBehaviour
     public float killcountdown = 2;
     public bool isDying;
 
+    public UI ui;
+
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
 
-
+       ui = GameObject.Find("UI").GetComponent<UI>();
 
     }
     private void Start()

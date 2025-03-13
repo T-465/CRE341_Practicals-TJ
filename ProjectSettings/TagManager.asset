@@ -11,6 +11,7 @@ TagManager:
   - Waypoint
   - Flocker
   - Flashlight
+  - UI
   layers:
   - Default
   - TransparentFX
