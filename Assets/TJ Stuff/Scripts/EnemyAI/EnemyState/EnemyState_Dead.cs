@@ -10,7 +10,7 @@ public class EnemyState_Dead : IEnemyState
     public void Enter(AIBase aiBase)
     {
         Debug.Log("Entering Dead State");
-  aiBase.agent.speed = 0;
+        aiBase.agent.speed = 0;
         aiBase.agent.Stop();
         aiBase.ui.AddScore(1);
         aiBase.gameObject.SetActive(false);

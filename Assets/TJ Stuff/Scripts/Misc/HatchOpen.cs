@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HatchOpen : MonoBehaviour
 {
@@ -12,10 +14,15 @@ public class HatchOpen : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            // Open the hatch
-            animator.SetBool("Opening", true);
+            StartCoroutine(Leave());
         }
     }
+public IEnumerator Leave()
+{
+    animator.SetBool("Opening", true);
+    yield return new WaitForSeconds(1);
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+}
 
 
 }
