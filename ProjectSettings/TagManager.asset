@@ -12,6 +12,7 @@ TagManager:
   - Flocker
   - Flashlight
   - UI
+  - Ghost
   layers:
   - Default
   - TransparentFX

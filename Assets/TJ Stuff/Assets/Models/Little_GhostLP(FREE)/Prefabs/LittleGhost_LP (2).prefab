@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 4225284833623157484}
   m_Layer: 0
   m_Name: LittleGhost_LP (2)
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -858,6 +858,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   killcountdown: 2
+  isDying: 0
+  ui: {fileID: 0}
 --- !u!195 &4225284833623157484
 NavMeshAgent:
   m_ObjectHideFlags: 0
