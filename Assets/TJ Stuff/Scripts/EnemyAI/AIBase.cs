@@ -8,15 +8,12 @@ using UnityEngine.UI;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 
-
 public class AIBase : MonoBehaviour
 {
-
     public NavMeshAgent agent;
 
     private IEnemyState currentState;
     public Transform player;
-
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -25,31 +22,32 @@ public class AIBase : MonoBehaviour
 
     public UI ui;
 
+    [Header("Detection Settings")]
+    public float detectionRadius = 5f;   
+    public bool playerDetected;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
 
-       ui = GameObject.Find("UI").GetComponent<UI>();
-
+        ui = GameObject.Find("UI").GetComponent<UI>();
     }
+
     private void Start()
     {
-
-        SetState(new EnemyState_Chase());
+        SetState(new EnemyState_Idle());
         Invoke("LocatePlayer", 1f);
     }
+
     private void OnEnable()
     {
-        SetState(new EnemyState_Chase());
-
+        SetState(new EnemyState_Idle());
     }
+
     private void OnDisable()
     {
-
     }
-
 
     private void Update()
     {
@@ -68,17 +66,37 @@ public class AIBase : MonoBehaviour
             killcountdown += Time.deltaTime;
         }
 
-if (killcountdown <= 0)
+        if (killcountdown <= 0)
         {
             SetState(new EnemyState_Dead());
         }
+
+        DetectPlayerInRadius();
     }
+
+    public void DetectPlayerInRadius()
+    {
+        playerDetected = Physics.CheckSphere(transform.position, detectionRadius, whatIsPlayer);
+        
+
+        Debug.Log("Player detected within radius!");
+    
+        
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
     public void SetState(IEnemyState newState)
     {
         currentState?.Exit(this);
         currentState = newState;
         currentState?.Enter(this);
     }
+
     public string GetCurrentStateName()
     {
         return currentState != null ? currentState.GetType().Name.Replace("AI", "") : "No State";
@@ -90,9 +108,7 @@ if (killcountdown <= 0)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-
     }
-
 
     public void OnTriggerEnter(Collider other)
     {
@@ -101,13 +117,13 @@ if (killcountdown <= 0)
             isDying = true;
         }
     }
-        public void OnTriggerExit(Collider other)
+
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Flashlight")
         {
             killcountdown = 0.5f;
             isDying = false;
-            
         }
     }
 }

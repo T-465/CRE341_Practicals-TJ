@@ -41,7 +41,7 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
 
-    float minDistanceFromWall = 3.5f;
+    float minDistanceFromWall;
 
     public NavMeshSurface navMeshSurface;
     // Start is called before the first frame update
@@ -98,6 +98,7 @@ public class DungeonCreator : MonoBehaviour
 
 private void SpawnProps()
 {
+    minDistanceFromWall = 3.5f;
    
     for (int i = 0; i < numberOfProps; i++)
     {
@@ -144,6 +145,7 @@ private void SpawnProps()
 
 private void SpawnHatch()
 {
+    minDistanceFromWall = 4.5f;
 
 
     for (int i = 0; i < numberOfHatches; i++)

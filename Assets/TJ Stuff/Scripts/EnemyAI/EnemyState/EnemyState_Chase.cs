@@ -5,12 +5,13 @@ using UnityEngine.AI;
 
 public class EnemyState_Chase :  IEnemyState
 {
-    // Mothmans Chase state in which he will chase the player if their flashlight is on and will shake the  players camera as it approaches as a warning
 
     public void Enter(AIBase aiBase)
     {
         Debug.Log("Entering Chase State");
         aiBase.agent.speed = 5;
+        aiBase.agent.Resume();
+        aiBase.agent.isStopped = false;
     }
     public void Update(AIBase aiBase)
     {
@@ -21,10 +22,8 @@ public class EnemyState_Chase :  IEnemyState
         aiBase.transform.LookAt(aiBase.player);
         aiBase.agent.SetDestination(aiBase.player.position);
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            aiBase.SetState(new EnemyState_Idle());
-        }
+   
+
 
     }
     public void Exit(AIBase aiBase)

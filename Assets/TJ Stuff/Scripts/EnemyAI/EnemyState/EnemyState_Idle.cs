@@ -20,9 +20,10 @@ public class EnemyState_Idle : IEnemyState
 
         if (aiBase.player == null) return;
 
-        if (Input.GetKey(KeyCode.R))
+        if (aiBase.playerDetected)
         {
             aiBase.SetState(new EnemyState_Chase());
+     
         }
 
         Debug.Log("AIIdle");
