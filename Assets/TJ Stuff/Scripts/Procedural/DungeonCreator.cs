@@ -41,6 +41,8 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
 
+    float minDistanceFromWall = 3.5f;
+
     public NavMeshSurface navMeshSurface;
     // Start is called before the first frame update
     void Start()
@@ -96,27 +98,91 @@ public class DungeonCreator : MonoBehaviour
 
 private void SpawnProps()
 {
+   
     for (int i = 0; i < numberOfProps; i++)
     {
-        Vector3 randomPosition = new Vector3(
-            UnityEngine.Random.Range(0, dungeonWidth),
-            0,
-            UnityEngine.Random.Range(0, dungeonLength)
-        );
+        Vector3 randomPosition;
+        bool validPosition;
+
+        do
+        {
+            validPosition = true;
+            randomPosition = new Vector3(
+                UnityEngine.Random.Range(0, dungeonWidth),
+                0,
+                UnityEngine.Random.Range(0, dungeonLength)
+            );
+
+            // Check distance from all wall positions
+            foreach (var wallPosition in possibleWallHorizontalPosition)
+            {
+                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+
+            if (validPosition)
+            {
+                foreach (var wallPosition in possibleWallVerticalPosition)
+                {
+                    if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                    {
+                        validPosition = false;
+                        break;
+                    }
+                }
+            }
+        } while (!validPosition);
+
         GameObject randomPropPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
         GameObject prop = Instantiate(randomPropPrefab, randomPosition, Quaternion.identity);
         props.Add(prop);
     }
 }
+
 private void SpawnHatch()
 {
+
+
     for (int i = 0; i < numberOfHatches; i++)
     {
-        Vector3 randomPosition = new Vector3(
-            UnityEngine.Random.Range(0, dungeonWidth),
-            0,
-            UnityEngine.Random.Range(0, dungeonLength)
-        );
+        Vector3 randomPosition;
+        bool validPosition;
+
+        do
+        {
+            validPosition = true;
+            randomPosition = new Vector3(
+                UnityEngine.Random.Range(0, dungeonWidth),
+                0,
+                UnityEngine.Random.Range(0, dungeonLength)
+            );
+
+            // Check distance from all wall positions
+            foreach (var wallPosition in possibleWallHorizontalPosition)
+            {
+                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+
+            if (validPosition)
+            {
+                foreach (var wallPosition in possibleWallVerticalPosition)
+                {
+                    if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                    {
+                        validPosition = false;
+                        break;
+                    }
+                }
+            }
+        } while (!validPosition);
+
         GameObject randomHatchPrefab = hatchPrefabs[UnityEngine.Random.Range(0, hatchPrefabs.Count)];
         GameObject hatch = Instantiate(randomHatchPrefab, randomPosition, Quaternion.identity);
         hatches.Add(hatch);
