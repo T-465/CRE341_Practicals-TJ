@@ -30,7 +30,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.9622642, g: 0.60217154, b: 0.60217154, a: 1}
+    m_Value: {r: 0.91823894, g: 0.34361765, b: 0.34361765, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   mode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
@@ -146,10 +146,10 @@ MonoBehaviour:
     m_Value: {x: 0.94730437, y: 0.97667015, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9104585, y: 0.9830139, z: 1, w: 0}
+    m_Value: {x: 0.9207974, y: 0.9603991, z: 1, w: 0}
   gain:
     m_OverrideState: 0
-    m_Value: {x: 0.8461053, y: 1, z: 0.79858124, w: 0}
+    m_Value: {x: 0.8704282, y: 1, z: 0.8717196, w: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

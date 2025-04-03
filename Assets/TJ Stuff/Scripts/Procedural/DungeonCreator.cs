@@ -34,10 +34,9 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] int numberOfHatches = 1;
     [SerializeField] List<GameObject> hatches = new List<GameObject>();
     [SerializeField] List<GameObject> hatchPrefabs = new List<GameObject>();
-    [SerializeField] List<GameObject> patrolPoints = new List<GameObject>();
-    [SerializeField] GameObject patrolpointsTrans;
-    
-    [SerializeField] int numberOfpatrolPoints = 10;
+    [SerializeField] List<GameObject> torches = new List<GameObject>();
+    [SerializeField] List<GameObject> torchPrefabs = new List<GameObject>();
+    [SerializeField] int numberOfTorches = 1;
 
 
     List<Vector3Int> possibleDoorVerticalPosition;
@@ -45,10 +44,12 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
 
-    float minDistanceFromWall;
+    public float minDistanceFromWall;
+    public float torchmaxDistanceFromWall = 0.1f;
+    public float minDistanceFromHatch = 1f;
 
     public NavMeshSurface navMeshSurface;
-    // Start is called before the first frame update
+ 
     void Start()
     {
         CreateDungeon();
@@ -79,11 +80,13 @@ public class DungeonCreator : MonoBehaviour
         DestroyNPCS();
         DestroyHatch();
         DestroyProps();
+        DestroyTorches();
        
         navMeshSurface.BuildNavMesh();
         SpawnNPCs();
-        SpawnProps();
         SpawnHatch();
+        SpawnProps();
+        SpawnTorches();
     
     }
     private void SpawnNPCs()
@@ -110,6 +113,9 @@ private void SpawnProps()
     {
         Vector3 randomPosition;
         bool validPosition;
+        Vector3 hatchPosition = hatches[0].transform.position; 
+      
+
 
         do
         {
@@ -141,6 +147,14 @@ private void SpawnProps()
                     }
                 }
             }
+            
+    if (validPosition)
+    {
+        if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
+        {
+            validPosition = false;
+        }
+    }
         } while (!validPosition);
 
         GameObject randomPropPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
@@ -148,7 +162,61 @@ private void SpawnProps()
         props.Add(prop);
     }
 }
+  private void SpawnTorches()
+{
+   
+    for (int i = 0; i < numberOfTorches; i++)
+    {
+        Vector3 randomPosition;
+        bool validPosition;
+      
+        do
+        {
+            validPosition = true;
+            randomPosition = new Vector3(
+                UnityEngine.Random.Range(0, dungeonWidth),
+                0,
+                UnityEngine.Random.Range(0, dungeonLength)
+            );
 
+            // Check distance from all wall positions
+            foreach (var wallPosition in possibleWallHorizontalPosition)
+            {
+                if (Vector3.Distance(randomPosition, wallPosition) > torchmaxDistanceFromWall)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+
+            if (validPosition)
+            {
+                foreach (var wallPosition in possibleWallVerticalPosition)
+                {
+                    if (Vector3.Distance(randomPosition, wallPosition) > torchmaxDistanceFromWall)
+                    {
+                        validPosition = false;
+                        break;
+                    }
+                }
+            }
+            
+        
+        } while (!validPosition);
+
+        GameObject randomTorchPrefab = torchPrefabs[UnityEngine.Random.Range(0, torchPrefabs.Count)];
+        GameObject torch = Instantiate(randomTorchPrefab, randomPosition, Quaternion.identity);
+        torches.Add(torch);
+    }
+}
+private void DestroyTorches()
+{
+    foreach (var torch in torches)
+    {
+        Destroy(torch);
+    }
+    torches.Clear();
+}
 private void SpawnHatch()
 {
     minDistanceFromWall = 4.5f;

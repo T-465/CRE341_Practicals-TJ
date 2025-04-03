@@ -37878,10 +37878,14 @@ MonoBehaviour:
   - {fileID: 0}
   hatchPrefabs:
   - {fileID: 7557005521531737924, guid: fc529c35afab78a4fa517a9cbad065e1, type: 3}
-  patrolPoints:
-  - {fileID: 6445892055179022171, guid: e07057711d05fd04d9f3ec3908d0a186, type: 3}
-  patrolpointsTrans: {fileID: 8828731666602535516, guid: e07057711d05fd04d9f3ec3908d0a186, type: 3}
-  numberOfpatrolPoints: 10
+  torches: []
+  torchPrefabs:
+  - {fileID: 6336650555541744390, guid: 2071281887c6f514388923e0ee4bae72, type: 3}
+  - {fileID: 4571895601050599619, guid: 2fa6be46c81c7fe459c9b54658d64e80, type: 3}
+  numberOfTorches: 10
+  minDistanceFromWall: 0
+  torchmaxDistanceFromWall: 0.1
+  minDistanceFromHatch: 1
   navMeshSurface: {fileID: 1300908049}
 --- !u!4 &1283770223
 Transform:
@@ -65147,7 +65151,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4589843195363587279, guid: 81352970b0873a241b74a04d34628be0, type: 3}
       propertyPath: m_Name
-      value: FinalScore
+      value: Singleton
       objectReference: {fileID: 0}
     - target: {fileID: 7870575130816514534, guid: 81352970b0873a241b74a04d34628be0, type: 3}
       propertyPath: m_LocalPosition.x

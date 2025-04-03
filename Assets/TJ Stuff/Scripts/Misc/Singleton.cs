@@ -5,6 +5,7 @@ public class Singleton : MonoBehaviour
     public static Singleton singleton;
     public UI ui;
     public int overallScore;
+    public int levelsComplete;
     void Awake()
     {
         if (singleton == null)
