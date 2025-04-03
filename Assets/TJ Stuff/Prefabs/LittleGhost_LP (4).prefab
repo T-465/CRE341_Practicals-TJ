@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &186762952288481815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7799764094935584479}
+  m_Layer: 0
+  m_Name: CentrePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7799764094935584479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186762952288481815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2602231374797837623}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2602231373285498727
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +699,7 @@ Transform:
   - {fileID: 2602231373293832200}
   - {fileID: 2602231374717726863}
   - {fileID: 2602231374847269580}
+  - {fileID: 7799764094935584479}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2602231374797837622
@@ -765,6 +797,12 @@ MonoBehaviour:
   killcountdown: 2
   isDying: 0
   ui: {fileID: 0}
+  patrolPoints: []
+  centrePoint: {fileID: 7799764094935584479}
+  range: 100
+  point: {x: 0, y: 0, z: 0}
+  detectionRadius: 5
+  playerDetected: 0
 --- !u!195 &1543517158179396655
 NavMeshAgent:
   m_ObjectHideFlags: 0

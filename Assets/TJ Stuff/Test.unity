@@ -37878,6 +37878,10 @@ MonoBehaviour:
   - {fileID: 0}
   hatchPrefabs:
   - {fileID: 7557005521531737924, guid: fc529c35afab78a4fa517a9cbad065e1, type: 3}
+  patrolPoints:
+  - {fileID: 6445892055179022171, guid: e07057711d05fd04d9f3ec3908d0a186, type: 3}
+  patrolpointsTrans: {fileID: 8828731666602535516, guid: e07057711d05fd04d9f3ec3908d0a186, type: 3}
+  numberOfpatrolPoints: 10
   navMeshSurface: {fileID: 1300908049}
 --- !u!4 &1283770223
 Transform:
@@ -38493,7 +38497,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 255
+    m_Bits: 217
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0

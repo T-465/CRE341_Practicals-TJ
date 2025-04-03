@@ -24,18 +24,22 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] int numberOfNPCs = 5;
 	[SerializeField] List<GameObject> npcs = new List<GameObject>();
     [SerializeField] List<GameObject> npcPrefabs = new List<GameObject>();
-    /*
-	[SerializeField] int numberWaypoints = 4;
-	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
-*/
+
+
     #endregion
 
     [SerializeField] int numberOfProps = 10;
     [SerializeField] List<GameObject> props = new List<GameObject>();
     [SerializeField] List<GameObject> propPrefabs = new List<GameObject>();
-       [SerializeField] int numberOfHatches = 10;
+    [SerializeField] int numberOfHatches = 1;
     [SerializeField] List<GameObject> hatches = new List<GameObject>();
     [SerializeField] List<GameObject> hatchPrefabs = new List<GameObject>();
+    [SerializeField] List<GameObject> patrolPoints = new List<GameObject>();
+    [SerializeField] GameObject patrolpointsTrans;
+    
+    [SerializeField] int numberOfpatrolPoints = 10;
+
+
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -75,10 +79,12 @@ public class DungeonCreator : MonoBehaviour
         DestroyNPCS();
         DestroyHatch();
         DestroyProps();
+       
         navMeshSurface.BuildNavMesh();
         SpawnNPCs();
         SpawnProps();
         SpawnHatch();
+    
     }
     private void SpawnNPCs()
 {
@@ -208,6 +214,7 @@ private void DestroyHatch()
 
     hatches.Clear();
 }
+
 
  private void DestroyNPCS()
     {

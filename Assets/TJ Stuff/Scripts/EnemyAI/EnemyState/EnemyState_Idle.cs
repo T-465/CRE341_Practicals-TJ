@@ -15,15 +15,16 @@ public class EnemyState_Idle : IEnemyState
 
     public void Update(AIBase aiBase)
     {
-        aiBase.agent.speed = 1;
-        aiBase.agent.Stop();
+        aiBase.agent.speed = 4;
+        
+
+        aiBase.PatrolPoints();
 
         if (aiBase.player == null) return;
 
         if (aiBase.playerDetected)
         {
             aiBase.SetState(new EnemyState_Chase());
-     
         }
 
         Debug.Log("AIIdle");

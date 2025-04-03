@@ -22,6 +22,12 @@ public class AIBase : MonoBehaviour
 
     public UI ui;
 
+    [Header("Patrol")]
+    public Transform[] patrolPoints;
+    public Transform centrePoint;
+    public int range;
+    public Vector3 point;
+
     [Header("Detection Settings")]
     public float detectionRadius = 5f;   
     public bool playerDetected;
@@ -125,5 +131,30 @@ public class AIBase : MonoBehaviour
             killcountdown = 0.5f;
             isDying = false;
         }
+    }
+
+    public void PatrolPoints()
+    {
+         if (agent.remainingDistance <= agent.stoppingDistance) //done with path
+        {
+            
+            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            {
+                Debug.DrawRay(point, Vector3.up, Color.red, 1.0f); //so you can see with gizmos
+                agent.SetDestination(point);
+            }
+        }
+    }
+    
+    public bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    {
+        if (NavMesh.SamplePosition(center + Random.insideUnitSphere * range, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+        {
+            result = hit.position;
+            return true;
+        }
+    
+        result = Vector3.zero;
+        return false;
     }
 }
