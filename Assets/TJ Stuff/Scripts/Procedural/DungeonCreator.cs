@@ -45,7 +45,7 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallVerticalPosition;
 
     public float minDistanceFromWall;
-    public float torchmaxDistanceFromWall = 0.1f;
+    public float torchmaxDistanceFromWall = 1f;
     public float minDistanceFromHatch = 1f;
 
     public NavMeshSurface navMeshSurface;
@@ -182,7 +182,12 @@ private void SpawnProps()
             // Check distance from all wall positions
             foreach (var wallPosition in possibleWallHorizontalPosition)
             {
-                if (Vector3.Distance(randomPosition, wallPosition) > torchmaxDistanceFromWall)
+                if (Vector3.Distance(randomPosition, wallPosition) < torchmaxDistanceFromWall)
+                {
+                    validPosition = true;
+                    break;
+                }
+                else
                 {
                     validPosition = false;
                     break;
@@ -193,7 +198,12 @@ private void SpawnProps()
             {
                 foreach (var wallPosition in possibleWallVerticalPosition)
                 {
-                    if (Vector3.Distance(randomPosition, wallPosition) > torchmaxDistanceFromWall)
+                    if (Vector3.Distance(randomPosition, wallPosition) < torchmaxDistanceFromWall && Vector3.Distance(randomPosition, wallPosition) > 0.1f)
+                    {
+                        validPosition = true;
+                        break;
+                    }
+                    else
                     {
                         validPosition = false;
                         break;
