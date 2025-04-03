@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class FinalScore : MonoBehaviour
+public class Singleton : MonoBehaviour
 {
-    public static FinalScore finalScore;
+    public static Singleton singleton;
     public UI ui;
     public int overallScore;
     void Awake()
     {
-        if (finalScore == null)
+        if (singleton == null)
         {
-            finalScore = this;
+            singleton = this;
             DontDestroyOnLoad(this);
         }
     }
@@ -17,10 +17,10 @@ public class FinalScore : MonoBehaviour
     {
         
     }
-  public void AddFinalScore(int v)
+  public void AddSingleton(int v)
 
   {
     overallScore += v;
-    
   }
 }
+

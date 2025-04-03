@@ -6,11 +6,11 @@ public class UI : MonoBehaviour
     public TMPro.TextMeshProUGUI score;
     public int currentScore;
     public int levelScore;
-    public FinalScore finalScore;
+    public Singleton singleton;
 
 public void Awake() 
 {
- finalScore = GameObject.Find("FinalScore").GetComponent<FinalScore>();
+  singleton = GameObject.Find("Singleton").GetComponent<Singleton>();
 }
 
     private void Start()
@@ -23,7 +23,7 @@ public void Awake()
   {
     currentScore += v;
     score.text = "x" + currentScore.ToString();
-    finalScore.AddFinalScore(v);
+    singleton.AddSingleton(v);
   }
 
     void OnDisable()

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7870575130816514534}
-  - component: {fileID: 1043130129172249055}
+  - component: {fileID: 9179468178778425934}
   m_Layer: 0
-  m_Name: FinalScore
-  m_TagString: Untagged
+  m_Name: Singleton
+  m_TagString: singleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1043130129172249055
+--- !u!114 &9179468178778425934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4589843195363587279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6891b221493ad49aaf85165ff7d98d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3598c871567c9574c9bb7c75e94bc726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  overallScore: 0
