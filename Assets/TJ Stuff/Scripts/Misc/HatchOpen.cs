@@ -5,13 +5,21 @@ using UnityEngine.SceneManagement;
 public class HatchOpen : MonoBehaviour
 {
     public Animator animator;
+    public Singleton singleton;
 
     public GameObject[] ghosts;
     public bool allGhostsDead;
+
+    [System.Obsolete]
     void Start()
     {
         animator = GetComponent<Animator>();
         animator.SetBool("Opening", false);
+        if (singleton == null)
+        {
+            singleton = FindObjectOfType<Singleton>();
+        }
+
     }
     void Update()
     {
@@ -34,6 +42,7 @@ public class HatchOpen : MonoBehaviour
     }
 public IEnumerator Leave()
 {
+    singleton.levelsComplete++;
     animator.SetBool("Opening", true);
     yield return new WaitForSeconds(1);
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);

@@ -6,12 +6,19 @@ public class Singleton : MonoBehaviour
     public UI ui;
     public int overallScore;
     public int levelsComplete;
+    public DungeonCreator dungeonCreator;
+
+    [System.Obsolete]
     void Awake()
     {
         if (singleton == null)
         {
             singleton = this;
             DontDestroyOnLoad(this);
+        }
+        if (dungeonCreator == null)
+        {
+            dungeonCreator = FindObjectOfType<DungeonCreator>();
         }
     }
     void Update()
