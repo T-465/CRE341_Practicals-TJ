@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -42,21 +43,28 @@ public class Flashlight : MonoBehaviour, ISwitchable
             countdown = 2;
 
         }
-        
-        if (Input.GetMouseButtonDown(0) && flashlightfull == true)
+        if (Input.GetMouseButton(0))
         {
-            Toggle();
+            if (flashlightfull)
+            {
+                FlashLight.enabled = true;
+                volumebeam.SetActive(true);
+            }
         }
+        else
+        {
+            FlashLight.enabled = false;
+            volumebeam.SetActive(false);
+        }
+      
 
         
         if (FlashLight.enabled == true)
         {
             countdown -= Time.deltaTime;
-            volumebeam.SetActive(true);
         }
         else if (FlashLight.enabled == false)
         {
-           volumebeam.SetActive(false);
             StartCoroutine(Cooldown());
             IEnumerator Cooldown()
             {
@@ -76,10 +84,10 @@ public class Flashlight : MonoBehaviour, ISwitchable
 
         if (countdown == 0 || countdown < 1)
         {
-           volumebeam.SetActive(false);
             FlashLight.enabled = false;
             flashlightdead = true;
             flashlightfull = false;
+            volumebeam.SetActive(false);
         }
         #endregion
     }
