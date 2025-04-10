@@ -209,13 +209,15 @@ private void SpawnProps()
             if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
             {
                 validPosition = false;
+                break;
             }
              // Check distance from the props
             if (Vector3.Distance(randomPosition, propPosition) < minDistanceFromProp)
             {
                 validPosition = false;
+                break;
             }
-            if (torches.Count > 0)
+            if (validPosition && torches.Count > 0)
             {
                 
                 // Check distance from the other torches
@@ -246,10 +248,7 @@ private void SpawnProps()
             GameObject torch = Instantiate(randomTorchPrefab, randomPosition, Quaternion.identity);
             torches.Add(torch);
         }
-        else
-        {
-            Debug.LogWarning("Failed to find a valid position for a torch.");
-        }
+     
     }
 }
 
