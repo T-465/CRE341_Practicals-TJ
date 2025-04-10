@@ -37878,14 +37878,15 @@ MonoBehaviour:
   - {fileID: 0}
   hatchPrefabs:
   - {fileID: 7557005521531737924, guid: fc529c35afab78a4fa517a9cbad065e1, type: 3}
-  torches: []
+  torches:
+  - {fileID: 0}
   torchPrefabs:
-  - {fileID: 6336650555541744390, guid: 2071281887c6f514388923e0ee4bae72, type: 3}
-  - {fileID: 4571895601050599619, guid: 2fa6be46c81c7fe459c9b54658d64e80, type: 3}
-  numberOfTorches: 10
+  - {fileID: 5361079049285645862, guid: dfc83be784d9f7441b596e917795ca44, type: 3}
+  numberOfTorches: 4
   minDistanceFromWall: 0
-  torchmaxDistanceFromWall: 0.1
   minDistanceFromHatch: 1
+  minDistanceFromProp: 1
+  minDistanceFromTorch: 30
   navMeshSurface: {fileID: 1300908049}
 --- !u!4 &1283770223
 Transform:

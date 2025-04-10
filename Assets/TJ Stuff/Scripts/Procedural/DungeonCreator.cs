@@ -36,7 +36,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] List<GameObject> hatchPrefabs = new List<GameObject>();
     [SerializeField] List<GameObject> torches = new List<GameObject>();
     [SerializeField] List<GameObject> torchPrefabs = new List<GameObject>();
-    [SerializeField] int numberOfTorches = 1;
+    [SerializeField] int numberOfTorches;
 
 
     List<Vector3Int> possibleDoorVerticalPosition;
@@ -45,11 +45,11 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallVerticalPosition;
 
     public float minDistanceFromWall;
-    public float torchmaxDistanceFromWall = 1f;
     public float minDistanceFromHatch = 1f;
+    public float minDistanceFromProp = 1f;
+    public float minDistanceFromTorch = 30.0f;
 
     public NavMeshSurface navMeshSurface;
- 
     void Start()
     {
         CreateDungeon();
@@ -162,73 +162,96 @@ private void SpawnProps()
         props.Add(prop);
     }
 }
-            private void SpawnTorches()
+  public void SpawnTorches()
+{
+    minDistanceFromWall = 10.0f;
+    minDistanceFromHatch = 5.0f;
+    minDistanceFromProp = 2.0f;
+    Vector3 hatchPosition = hatches[0].transform.position;
+    Vector3 propPosition = props[0].transform.position;
+    Vector3 torchPosition;
+   
+    for (int i = 0; i < numberOfTorches; i++)
+    {
+        Vector3 randomPosition;
+        bool validPosition;
+        
+        do
+        {
+            validPosition = true;
+            randomPosition = new Vector3(
+                UnityEngine.Random.Range(0, dungeonWidth),
+                0,
+                UnityEngine.Random.Range(0, dungeonLength)
+            );
+                foreach (var wallPosition in possibleWallHorizontalPosition)
             {
-                int maxAttempts = 5000; // Maximum number of attempts to find a valid position
-      
-            
-                for (int i = 0; i < numberOfTorches; i++)
+                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
                 {
-                    Vector3 randomPosition;
-                    bool validPosition;
-                    int attempts = 0;
-            
-                    do
+                    validPosition = false;
+                    break;
+                }
+            }
+
+            if (validPosition)
+            {
+                foreach (var wallPosition in possibleWallVerticalPosition)
+                {
+                    if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
                     {
-                        validPosition = true;
-                        randomPosition = new Vector3(
-                            UnityEngine.Random.Range(0, dungeonWidth),
-                            0,
-                            UnityEngine.Random.Range(0, dungeonLength)
-                        );
-            
-                        // Check distance from all horizontal wall positions
-                        foreach (var wallPosition in possibleWallHorizontalPosition)
-                        {
-                            if (Vector3.Distance(randomPosition, wallPosition) > torchmaxDistanceFromWall && Vector3.Distance(randomPosition, wallPosition) < 0.5f)
-                            {
-                                validPosition = false;
-                                break;
-                            }
-                        }
-            
-                        if (validPosition)
-                        {
-                            foreach (var wallPosition in possibleWallVerticalPosition)
-                            {
-                                if (Vector3.Distance(randomPosition, wallPosition) > torchmaxDistanceFromWall && Vector3.Distance(randomPosition, wallPosition) < 0.5f)
-                                {
-                                    validPosition = false;
-                                    break;
-                                }
-                            }
-                        }
-            
-              
-            
-                        attempts++;
-                        if (attempts >= maxAttempts)
-                        {
-                            Debug.LogWarning("Max attempts reached while trying to find a valid torch position.");
-                            break;
-                        }
-            
-                    } while (!validPosition);
-            
-                    if (validPosition)
-                    {
-                        GameObject randomTorchPrefab = torchPrefabs[UnityEngine.Random.Range(0, torchPrefabs.Count)];
-                        GameObject torch = Instantiate(randomTorchPrefab, randomPosition, Quaternion.identity);
-                        torches.Add(torch);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Failed to find a valid position for a torch.");
+                        validPosition = false;
+                        break;
                     }
                 }
             }
+
+            // Check distance from the hatch
+            if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
+            {
+                validPosition = false;
+            }
+             // Check distance from the props
+            if (Vector3.Distance(randomPosition, propPosition) < minDistanceFromProp)
+            {
+                validPosition = false;
+            }
+            if (torches.Count > 0)
+            {
+                
+                // Check distance from the other torches
+                foreach (var torch in torches)
+                {
+                    torchPosition = torches[0].transform.position;
+                    if (Vector3.Distance(randomPosition, torchPosition) < minDistanceFromTorch)
+                    {
+                        validPosition = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                // If there are no torches yet, we can skip this check
+                validPosition = true;
+            }
+
             
-    
+             
+        
+        } while (!validPosition);
+
+        if (validPosition)
+        {
+            GameObject randomTorchPrefab = torchPrefabs[UnityEngine.Random.Range(0, torchPrefabs.Count)];
+            GameObject torch = Instantiate(randomTorchPrefab, randomPosition, Quaternion.identity);
+            torches.Add(torch);
+        }
+        else
+        {
+            Debug.LogWarning("Failed to find a valid position for a torch.");
+        }
+    }
+}
 
 private void DestroyTorches()
 {

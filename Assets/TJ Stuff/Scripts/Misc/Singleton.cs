@@ -21,9 +21,14 @@ public class Singleton : MonoBehaviour
             dungeonCreator = FindObjectOfType<DungeonCreator>();
         }
     }
+
+    [System.Obsolete]
     void Update()
     {
-        
+           if (dungeonCreator == null)
+        {
+            dungeonCreator = FindObjectOfType<DungeonCreator>();
+        }
     }
   public void AddSingleton(int v)
 
