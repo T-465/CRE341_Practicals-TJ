@@ -37884,9 +37884,9 @@ MonoBehaviour:
   - {fileID: 5361079049285645862, guid: dfc83be784d9f7441b596e917795ca44, type: 3}
   numberOfTorches: 4
   minDistanceFromWall: 0
-  minDistanceFromHatch: 1
-  minDistanceFromProp: 1
-  minDistanceFromTorch: 30
+  minDistanceFromHatch: 0
+  minDistanceFromProp: 0
+  minDistanceFromTorch: 0
   navMeshSurface: {fileID: 1300908049}
 --- !u!4 &1283770223
 Transform:

@@ -36,7 +36,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] List<GameObject> hatchPrefabs = new List<GameObject>();
     [SerializeField] List<GameObject> torches = new List<GameObject>();
     [SerializeField] List<GameObject> torchPrefabs = new List<GameObject>();
-    [SerializeField] int numberOfTorches;
+    [SerializeField] int numberOfTorches = 4;
 
 
     List<Vector3Int> possibleDoorVerticalPosition;
@@ -45,9 +45,9 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallVerticalPosition;
 
     public float minDistanceFromWall;
-    public float minDistanceFromHatch = 1f;
-    public float minDistanceFromProp = 1f;
-    public float minDistanceFromTorch = 30.0f;
+    public float minDistanceFromHatch ;
+    public float minDistanceFromProp;
+    public float minDistanceFromTorch;
 
     public NavMeshSurface navMeshSurface;
     void Start()
@@ -108,6 +108,8 @@ public class DungeonCreator : MonoBehaviour
 private void SpawnProps()
 {
     minDistanceFromWall = 3.5f;
+    minDistanceFromHatch = 1.0f;
+
    
     for (int i = 0; i < numberOfProps; i++)
     {
@@ -164,17 +166,20 @@ private void SpawnProps()
 }
   public void SpawnTorches()
 {
-    minDistanceFromWall = 10.0f;
+    minDistanceFromWall = 5.0f;
     minDistanceFromHatch = 5.0f;
     minDistanceFromProp = 2.0f;
-    Vector3 hatchPosition = hatches[0].transform.position;
-    Vector3 propPosition = props[0].transform.position;
-    Vector3 torchPosition;
+    minDistanceFromTorch = 10.0f;
+ 
    
     for (int i = 0; i < numberOfTorches; i++)
     {
         Vector3 randomPosition;
         bool validPosition;
+        Vector3 hatchPosition = hatches[0].transform.position;
+    Vector3 propPosition = props[0].transform.position;
+    Vector3 torchPosition;
+   
         
         do
         {
@@ -231,14 +236,7 @@ private void SpawnProps()
                     }
                 }
             }
-            else
-            {
-                // If there are no torches yet, we can skip this check
-                validPosition = true;
-            }
-
             
-             
         
         } while (!validPosition);
 
