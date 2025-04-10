@@ -37825,6 +37825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08073412c93e96842983088ab37ea3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singleton: {fileID: 9208736693555481460}
   dungeonWidth: 50
   dungeonLength: 50
   roomWidthMin: 15
@@ -37882,7 +37883,7 @@ MonoBehaviour:
   - {fileID: 0}
   torchPrefabs:
   - {fileID: 5361079049285645862, guid: dfc83be784d9f7441b596e917795ca44, type: 3}
-  numberOfTorches: 4
+  numberOfTorches: 0
   minDistanceFromWall: 0
   minDistanceFromHatch: 0
   minDistanceFromProp: 0
@@ -65199,6 +65200,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81352970b0873a241b74a04d34628be0, type: 3}
+--- !u!114 &9208736693555481460 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9179468178778425934, guid: 81352970b0873a241b74a04d34628be0, type: 3}
+  m_PrefabInstance: {fileID: 9208736693555481459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3598c871567c9574c9bb7c75e94bc726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

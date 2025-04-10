@@ -18,18 +18,18 @@ public class Singleton : MonoBehaviour
         }
         if (dungeonCreator == null)
         {
-            dungeonCreator = FindObjectOfType<DungeonCreator>();
+            dungeonCreator = GameObject.FindWithTag("DunGen").GetComponent<DungeonCreator>();
+        }
+    }
+    void Start()
+    {
+   
+        if (dungeonCreator == null)
+        {
+            dungeonCreator = GameObject.FindWithTag("DunGen").GetComponent<DungeonCreator>();
         }
     }
 
-    [System.Obsolete]
-    void Update()
-    {
-           if (dungeonCreator == null)
-        {
-            dungeonCreator = FindObjectOfType<DungeonCreator>();
-        }
-    }
   public void AddSingleton(int v)
 
   {
