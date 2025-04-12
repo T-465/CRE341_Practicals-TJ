@@ -6,10 +6,8 @@ using UnityEngine;
 
 public class DungeonCreator : MonoBehaviour
 {
-    public int dungeonWidth, dungeonLength;
-    public int roomWidthMin, roomLengthMin;
-    public int maxIterations;
-    public int corridorWidth;
+
+    [Header("Dungeon Settings")]
     public Material material;
     [Range(0.0f, 0.3f)]
     public float roomBottomCornerModifier;
@@ -21,14 +19,14 @@ public class DungeonCreator : MonoBehaviour
 
     #region NPCSpawning
     public GameObject npcPrefab, waypointsPrefab;
-    [SerializeField] int numberOfNPCs = 5;
+   
 	[SerializeField] List<GameObject> npcs = new List<GameObject>();
     [SerializeField] List<GameObject> npcPrefabs = new List<GameObject>();
 
 
     #endregion
 
-    [SerializeField] int numberOfProps = 10;
+
     [SerializeField] List<GameObject> props = new List<GameObject>();
     [SerializeField] List<GameObject> propPrefabs = new List<GameObject>();
     [SerializeField] int numberOfHatches = 1;
@@ -36,7 +34,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] List<GameObject> hatchPrefabs = new List<GameObject>();
     [SerializeField] List<GameObject> torches = new List<GameObject>();
     [SerializeField] List<GameObject> torchPrefabs = new List<GameObject>();
-    [SerializeField] int numberOfTorches = 4;
+   
 
 
     List<Vector3Int> possibleDoorVerticalPosition;
@@ -49,14 +47,103 @@ public class DungeonCreator : MonoBehaviour
     public float minDistanceFromProp;
     public float minDistanceFromTorch;
 
+    [SerializeField] int numberOfProps { get; set; }
+    [SerializeField] private int numberOfNPCs { get; set; }
+    [SerializeField] private int numberOfTorches{ get; set; }
+    [SerializeField] private int dungeonWidth { get; set; }
+    [SerializeField] private int dungeonLength { get; set; }
+    [SerializeField] private int roomWidthMin { get; set; }
+    [SerializeField] private int roomLengthMin { get; set; }
+    [SerializeField] private int maxIterations { get; set; }
+    [SerializeField] private int corridoorWidth { get; set; }
     public NavMeshSurface navMeshSurface;
-    void Start()
+    public Singleton singleton; 
+
+    public void Start()
     {
+        if (singleton == null)
+        {
+            singleton = FindObjectOfType<Singleton>();
+        }
         CreateDungeon();
     }
     public void CreateDungeon()
     {
         DestroyAllChildren();
+          switch (singleton.levelsComplete)
+            {
+                case 0:
+                    numberOfProps = 10;
+                    numberOfNPCs = 5;
+                    numberOfTorches = 4;
+                    dungeonWidth = 20;
+                    dungeonLength = 20;
+                    roomWidthMin = 3;
+                    roomLengthMin = 3;
+                    maxIterations = 10;
+                    corridoorWidth = 2;
+                    break;
+
+                case 1:
+                    numberOfProps = 12;
+                    numberOfNPCs = 6;
+                    numberOfTorches = 5;
+                    dungeonWidth = 30;
+                    dungeonLength = 30;
+                    roomWidthMin = 4;
+                    roomLengthMin = 4;
+                    maxIterations = 15;
+                    corridoorWidth = 2;
+                    break;
+
+                case 2:
+                    numberOfProps = 15;
+                    numberOfNPCs = 8;
+                    numberOfTorches = 6;
+                    dungeonWidth = 40;
+                    dungeonLength = 40;
+                    roomWidthMin = 5;
+                    roomLengthMin = 5;
+                    maxIterations = 20;
+                    corridoorWidth = 3;
+                    break;
+
+                case 3:
+                    numberOfProps = 18;
+                    numberOfNPCs = 10;
+                    numberOfTorches = 8;
+                    dungeonWidth = 50;
+                    dungeonLength = 50;
+                    roomWidthMin = 6;
+                    roomLengthMin = 6;
+                    maxIterations = 25;
+                    corridoorWidth = 3;
+                    break;
+
+                case 4:
+                    numberOfProps = 20;
+                    numberOfNPCs = 10;
+                    numberOfTorches = 10;
+                    dungeonWidth = 60;
+                    dungeonLength = 60;
+                    roomWidthMin = 7;
+                    roomLengthMin = 7;
+                    maxIterations = 30;
+                    corridoorWidth = 4;
+                    break;
+
+                default: // For levelsComplete >= 5
+                    numberOfProps = 20;
+                    numberOfNPCs = 10;
+                    numberOfTorches = 10;
+                    dungeonWidth = 70;
+                    dungeonLength = 70;
+                    roomWidthMin = 8;
+                    roomLengthMin = 8;
+                    maxIterations = 35;
+                    corridoorWidth = 4;
+                    break;
+            }
         DungeonGen generator = new DungeonGen(dungeonWidth, dungeonLength);
         var listOfRooms = generator.CalculateDungeon(maxIterations,
             roomWidthMin,
@@ -64,7 +151,7 @@ public class DungeonCreator : MonoBehaviour
             roomBottomCornerModifier,
             roomTopCornerMidifier,
             roomOffset,
-            corridorWidth);
+            corridoorWidth);
         GameObject wallParent = new GameObject("WallParent");
         wallParent.transform.parent = transform;
         possibleDoorVerticalPosition = new List<Vector3Int>();
