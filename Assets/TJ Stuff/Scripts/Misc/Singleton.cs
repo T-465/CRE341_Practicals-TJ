@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Singleton : MonoBehaviour
 {
@@ -7,10 +8,9 @@ public class Singleton : MonoBehaviour
     public int overallScore;
     public int levelsComplete;
     public DungeonCreator dungeonCreator;
-
-    [System.Obsolete]
     void Awake()
     {
+        levelsComplete = 0;
         if (singleton == null)
         {
             singleton = this;
@@ -21,19 +21,33 @@ public class Singleton : MonoBehaviour
             dungeonCreator = GameObject.FindWithTag("DunGen").GetComponent<DungeonCreator>();
         }
     }
+
     void Start()
     {
-   
         if (dungeonCreator == null)
         {
             dungeonCreator = GameObject.FindWithTag("DunGen").GetComponent<DungeonCreator>();
         }
     }
 
-  public void AddSingleton(int v)
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-  {
-    overallScore += v;
-  }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+       Start();
+    }
+
+    public void AddSingleton(int v)
+    {
+        overallScore += v;
+    }
 }
 
