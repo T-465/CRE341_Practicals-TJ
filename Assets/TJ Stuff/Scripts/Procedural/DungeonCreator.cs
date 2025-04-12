@@ -47,14 +47,14 @@ public class DungeonCreator : MonoBehaviour
     public float minDistanceFromHatch;
     public float minDistanceFromProp;
     public float minDistanceFromTorch;
-    [SerializeField] int numberofProps = 10;
-    [SerializeField] int numberofNPCs = 5;
-    [SerializeField] int numberofTorches = 4;
-    [SerializeField] int dungeonWidth = 15;
-    [SerializeField] int dungeonLength = 15;
-    [SerializeField] int roomWidthMin = 3;
-    [SerializeField] int roomLengthMin = 3;
-    [SerializeField] int maxIterations = 10;
+    [SerializeField] int numberofProps;
+    [SerializeField] int numberofNPCs ;
+    [SerializeField] int numberofTorches;
+    [SerializeField] int dungeonWidth;
+    [SerializeField] int dungeonLength ;
+    [SerializeField] int roomWidthMin ;
+    [SerializeField] int roomLengthMin ;
+    [SerializeField] int maxIterations;
     
 
     public NavMeshSurface navMeshSurface;
@@ -68,12 +68,23 @@ public class DungeonCreator : MonoBehaviour
         
 
         // Ensure parameters are set before creating the dungeon
-         InitializeDungeonParameters();
-        CreateDungeon();
+        InitializeDungeonParameters();
+        StartCoroutine(CreateDungeon());
     }
 
     public void InitializeDungeonParameters()
     {
+        if (singleton.levelsComplete == 0)
+        {
+            numberofProps = 10;
+            numberofNPCs = 6;
+            numberofTorches = 5;
+            dungeonWidth = 50;
+            dungeonLength = 40;
+            roomWidthMin = 10;
+            roomLengthMin = 20;
+            maxIterations = 5;
+        }
     
         if (singleton.levelsComplete == 1)
         {
@@ -82,9 +93,9 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 5;
             dungeonWidth = 50;
             dungeonLength = 40;
-            roomWidthMin = 4;
-            roomLengthMin = 4;
-            maxIterations = 1;
+            roomWidthMin = 12;
+            roomLengthMin = 22;
+            maxIterations = 6;
         }
         else if (singleton.levelsComplete == 2)
         {
@@ -93,9 +104,9 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 6;
             dungeonWidth = 50;
             dungeonLength = 42;
-            roomWidthMin = 5;
-            roomLengthMin = 5;
-            maxIterations = 2;
+            roomWidthMin = 12;
+            roomLengthMin = 24;
+            maxIterations = 7;
         
         }
         else if (singleton.levelsComplete == 3)
@@ -105,9 +116,9 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 8;
             dungeonWidth = 50;
             dungeonLength = 40;
-            roomWidthMin = 6;
-            roomLengthMin = 6;
-            maxIterations = 3;
+            roomWidthMin = 14;
+            roomLengthMin = 24;
+            maxIterations = 8;
         }
         else if (singleton.levelsComplete == 4)
         {
@@ -116,9 +127,9 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 10;
             dungeonWidth = 50;
             dungeonLength = 45;
-            roomWidthMin = 7;
-            roomLengthMin = 7;
-            maxIterations = 4;
+            roomWidthMin = 15;
+            roomLengthMin = 25;
+            maxIterations = 9;
         }
         else if (singleton.levelsComplete >= 5)
         {
@@ -127,14 +138,15 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 10;
             dungeonWidth = 50;
             dungeonLength = 50;
-            roomWidthMin = 8;
-            roomLengthMin = 8;
-            maxIterations = 5;
+            roomWidthMin = 15;
+            roomLengthMin = 25;
+            maxIterations = 9;
         }
     }
 
-    public void CreateDungeon()
+    public IEnumerator CreateDungeon()
     {
+        yield return new WaitForSeconds(2);
         DestroyAllChildren();
      
         DungeonGen generator = new DungeonGen(dungeonWidth, dungeonLength);

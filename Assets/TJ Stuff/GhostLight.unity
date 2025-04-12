@@ -37808,7 +37808,7 @@ GameObject:
   - component: {fileID: 1283770224}
   m_Layer: 0
   m_Name: DungeonCreator
-  m_TagString: Untagged
+  m_TagString: DunGen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37826,11 +37826,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   singleton: {fileID: 9208736693555481460}
-  dungeonWidth: 50
-  dungeonLength: 50
-  roomWidthMin: 15
-  roomLengthMin: 25
-  maxIterations: 10
   corridorWidth: 5
   material: {fileID: -3430260887782380852, guid: 7bd3e9b38880c2e4c92e394fa492fd3a, type: 3}
   roomBottomCornerModifier: 0.2
@@ -37840,7 +37835,6 @@ MonoBehaviour:
   wallHorizontal: {fileID: 7887518253945761346, guid: 4f1ee7246cb5d2a4d9aa03a4c0c9e13d, type: 3}
   npcPrefab: {fileID: 8406845055882037674, guid: 36621476210b2c649b8aeea96b7c2587, type: 3}
   waypointsPrefab: {fileID: 0}
-  numberOfNPCs: 5
   npcs:
   - {fileID: 0}
   - {fileID: 0}
@@ -37856,7 +37850,6 @@ MonoBehaviour:
   - {fileID: 958745142335686053, guid: 95aa05ec0ea0a884ab92946b57d2c7b4, type: 3}
   - {fileID: 5446477390807014373, guid: b713585f24f940f4eadb10319818ef40, type: 3}
   - {fileID: 2602231374797837610, guid: 855c90c429434444fbe3ca2b5507ab04, type: 3}
-  numberOfProps: 10
   props:
   - {fileID: 0}
   - {fileID: 0}
@@ -37874,7 +37867,7 @@ MonoBehaviour:
   - {fileID: 2676900323879703253, guid: 1e8c20d1136dacc4799590d2d9b210a6, type: 3}
   - {fileID: 4194682928321090313, guid: 310ec8c18f709b24391329893cf1f9df, type: 3}
   - {fileID: 2458606861065807219, guid: 60da911873d56dd4abb6732f3ccdc0aa, type: 3}
-  numberOfHatches: 1
+  numberofHatches: 1
   hatches:
   - {fileID: 0}
   hatchPrefabs:
@@ -37883,11 +37876,18 @@ MonoBehaviour:
   - {fileID: 0}
   torchPrefabs:
   - {fileID: 5361079049285645862, guid: dfc83be784d9f7441b596e917795ca44, type: 3}
-  numberOfTorches: 0
   minDistanceFromWall: 0
   minDistanceFromHatch: 0
   minDistanceFromProp: 0
   minDistanceFromTorch: 0
+  numberofProps: 10
+  numberofNPCs: 5
+  numberofTorches: 4
+  dungeonWidth: 50
+  dungeonLength: 50
+  roomWidthMin: 15
+  roomLengthMin: 25
+  maxIterations: 10
   navMeshSurface: {fileID: 1300908049}
 --- !u!4 &1283770223
 Transform:
