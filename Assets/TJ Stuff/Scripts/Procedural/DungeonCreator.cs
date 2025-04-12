@@ -18,15 +18,12 @@ public class DungeonCreator : MonoBehaviour
     public GameObject wallVertical, wallHorizontal;
 
     #region NPCSpawning
-    public GameObject npcPrefab, waypointsPrefab;
+    public GameObject npcPrefab;
    
 	[SerializeField] List<GameObject> npcs = new List<GameObject>();
     [SerializeField] List<GameObject> npcPrefabs = new List<GameObject>();
 
-
     #endregion
-
-
     [SerializeField] List<GameObject> props = new List<GameObject>();
     [SerializeField] List<GameObject> propPrefabs = new List<GameObject>();
     [SerializeField] int numberOfHatches = 1;
@@ -43,7 +40,7 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallVerticalPosition;
 
     public float minDistanceFromWall;
-    public float minDistanceFromHatch ;
+    public float minDistanceFromHatch;
     public float minDistanceFromProp;
     public float minDistanceFromTorch;
 
@@ -63,87 +60,89 @@ public class DungeonCreator : MonoBehaviour
     {
         if (singleton == null)
         {
-            singleton = FindObjectOfType<Singleton>();
+            singleton = FindFirstObjectByType<Singleton>();
         }
-        CreateDungeon();
+        StartCoroutine(CreateDungeonAsync());
     }
-    public void CreateDungeon()
+
+    public IEnumerator CreateDungeonAsync()
     {
         DestroyAllChildren();
-          switch (singleton.levelsComplete)
-            {
-                case 0:
-                    numberOfProps = 10;
-                    numberOfNPCs = 5;
-                    numberOfTorches = 4;
-                    dungeonWidth = 20;
-                    dungeonLength = 20;
-                    roomWidthMin = 3;
-                    roomLengthMin = 3;
-                    maxIterations = 10;
-                    corridoorWidth = 2;
-                    break;
+        switch (singleton.levelsComplete)
+        {
+            case 0:
+                numberOfProps = 10;
+                numberOfNPCs = 5;
+                numberOfTorches = 4;
+                dungeonWidth = 20;
+                dungeonLength = 20;
+                roomWidthMin = 3;
+                roomLengthMin = 3;
+                maxIterations = 10;
+                corridoorWidth = 2;
+                break;
 
-                case 1:
-                    numberOfProps = 12;
-                    numberOfNPCs = 6;
-                    numberOfTorches = 5;
-                    dungeonWidth = 30;
-                    dungeonLength = 30;
-                    roomWidthMin = 4;
-                    roomLengthMin = 4;
-                    maxIterations = 15;
-                    corridoorWidth = 2;
-                    break;
+            case 1:
+                numberOfProps = 12;
+                numberOfNPCs = 6;
+                numberOfTorches = 5;
+                dungeonWidth = 30;
+                dungeonLength = 30;
+                roomWidthMin = 4;
+                roomLengthMin = 4;
+                maxIterations = 15;
+                corridoorWidth = 2;
+                break;
 
-                case 2:
-                    numberOfProps = 15;
-                    numberOfNPCs = 8;
-                    numberOfTorches = 6;
-                    dungeonWidth = 40;
-                    dungeonLength = 40;
-                    roomWidthMin = 5;
-                    roomLengthMin = 5;
-                    maxIterations = 20;
-                    corridoorWidth = 3;
-                    break;
+            case 2:
+                numberOfProps = 15;
+                numberOfNPCs = 8;
+                numberOfTorches = 6;
+                dungeonWidth = 40;
+                dungeonLength = 40;
+                roomWidthMin = 5;
+                roomLengthMin = 5;
+                maxIterations = 20;
+                corridoorWidth = 3;
+                break;
 
-                case 3:
-                    numberOfProps = 18;
-                    numberOfNPCs = 10;
-                    numberOfTorches = 8;
-                    dungeonWidth = 50;
-                    dungeonLength = 50;
-                    roomWidthMin = 6;
-                    roomLengthMin = 6;
-                    maxIterations = 25;
-                    corridoorWidth = 3;
-                    break;
+            case 3:
+                numberOfProps = 18;
+                numberOfNPCs = 10;
+                numberOfTorches = 8;
+                dungeonWidth = 50;
+                dungeonLength = 50;
+                roomWidthMin = 6;
+                roomLengthMin = 6;
+                maxIterations = 25;
+                corridoorWidth = 3;
+                break;
 
-                case 4:
-                    numberOfProps = 20;
-                    numberOfNPCs = 10;
-                    numberOfTorches = 10;
-                    dungeonWidth = 60;
-                    dungeonLength = 60;
-                    roomWidthMin = 7;
-                    roomLengthMin = 7;
-                    maxIterations = 30;
-                    corridoorWidth = 4;
-                    break;
+            case 4:
+                numberOfProps = 20;
+                numberOfNPCs = 10;
+                numberOfTorches = 10;
+                dungeonWidth = 60;
+                dungeonLength = 60;
+                roomWidthMin = 7;
+                roomLengthMin = 7;
+                maxIterations = 30;
+                corridoorWidth = 4;
+                break;
 
-                default: // For levelsComplete >= 5
-                    numberOfProps = 20;
-                    numberOfNPCs = 10;
-                    numberOfTorches = 10;
-                    dungeonWidth = 70;
-                    dungeonLength = 70;
-                    roomWidthMin = 8;
-                    roomLengthMin = 8;
-                    maxIterations = 35;
-                    corridoorWidth = 4;
-                    break;
-            }
+            default: // For levelsComplete >= 5
+                numberOfProps = 20;
+                numberOfNPCs = 10;
+                numberOfTorches = 10;
+                dungeonWidth = 70;
+                dungeonLength = 70;
+                roomWidthMin = 8;
+                roomLengthMin = 8;
+                maxIterations = 35;
+                corridoorWidth = 4;
+                break;
+        }
+
         DungeonGen generator = new DungeonGen(dungeonWidth, dungeonLength);
         var listOfRooms = generator.CalculateDungeon(maxIterations,
             roomWidthMin,
@@ -152,142 +151,73 @@ public class DungeonCreator : MonoBehaviour
             roomTopCornerMidifier,
             roomOffset,
             corridoorWidth);
+
         GameObject wallParent = new GameObject("WallParent");
         wallParent.transform.parent = transform;
         possibleDoorVerticalPosition = new List<Vector3Int>();
         possibleDoorHorizontalPosition = new List<Vector3Int>();
         possibleWallHorizontalPosition = new List<Vector3Int>();
         possibleWallVerticalPosition = new List<Vector3Int>();
+
         for (int i = 0; i < listOfRooms.Count; i++)
         {
             CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
+            if (i % 5 == 0) yield return null; // Allow Unity to process frames every 5 iterations
         }
+
         CreateWalls(wallParent);
 
         DestroyNPCS();
         DestroyHatch();
         DestroyProps();
         DestroyTorches();
-       
+
         navMeshSurface.BuildNavMesh();
+        yield return null; // Allow Unity to process the frame
+
         SpawnNPCs();
         SpawnHatch();
         SpawnProps();
         SpawnTorches();
-    
     }
+
     private void SpawnNPCs()
-{
-    for (int i = 0; i < numberOfNPCs; i++)
     {
-        Vector3 randomPosition = new Vector3(
-            UnityEngine.Random.Range(0, dungeonWidth),
-            0,
-            UnityEngine.Random.Range(0, dungeonLength)
-        );
-        GameObject randomNpcPrefab = npcPrefabs[UnityEngine.Random.Range(0, npcPrefabs.Count)];
-        GameObject npc = Instantiate(randomNpcPrefab, randomPosition, Quaternion.identity);
-        npcs.Add(npc);
-    }
-   
-}
-
-private void SpawnProps()
-{
-    minDistanceFromWall = 3.5f;
-    minDistanceFromHatch = 1.0f;
-
-   
-    for (int i = 0; i < numberOfProps; i++)
-    {
-        Vector3 randomPosition;
-        bool validPosition;
-        Vector3 hatchPosition = hatches[0].transform.position; 
-      
-
-
-        do
+        for (int i = 0; i < numberOfNPCs; i++)
         {
-            validPosition = true;
-            randomPosition = new Vector3(
+            Vector3 randomPosition = new Vector3(
                 UnityEngine.Random.Range(0, dungeonWidth),
                 0,
                 UnityEngine.Random.Range(0, dungeonLength)
             );
-
-            // Check distance from all wall positions
-            foreach (var wallPosition in possibleWallHorizontalPosition)
-            {
-                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
-                {
-                    validPosition = false;
-                    break;
-                }
-            }
-
-            if (validPosition)
-            {
-                foreach (var wallPosition in possibleWallVerticalPosition)
-                {
-                    if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
-                    {
-                        validPosition = false;
-                        break;
-                    }
-                }
-            }
-            
-    if (validPosition)
-    {
-        if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
-        {
-            validPosition = false;
+            GameObject randomNpcPrefab = npcPrefabs[UnityEngine.Random.Range(0, npcPrefabs.Count)];
+            GameObject npc = Instantiate(randomNpcPrefab, randomPosition, Quaternion.identity);
+            npcs.Add(npc);
         }
     }
-        } while (!validPosition);
 
-        GameObject randomPropPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
-        GameObject prop = Instantiate(randomPropPrefab, randomPosition, Quaternion.identity);
-        props.Add(prop);
-    }
-}
-  public void SpawnTorches()
-{
-    minDistanceFromWall = 5.0f;
-    minDistanceFromHatch = 5.0f;
-    minDistanceFromProp = 2.0f;
-    minDistanceFromTorch = 10.0f;
- 
-   
-    for (int i = 0; i < numberOfTorches; i++)
+    private void SpawnProps()
     {
-        Vector3 randomPosition;
-        bool validPosition;
-        Vector3 hatchPosition = hatches[0].transform.position;
-    Vector3 propPosition = props[0].transform.position;
-    Vector3 torchPosition;
-   
-        
-        do
+        minDistanceFromWall = 3.5f;
+        minDistanceFromHatch = 1.0f;
+
+        for (int i = 0; i < numberOfProps; i++)
         {
-            validPosition = true;
-            randomPosition = new Vector3(
-                UnityEngine.Random.Range(0, dungeonWidth),
-                0,
-                UnityEngine.Random.Range(0, dungeonLength)
-            );
+            Vector3 randomPosition;
+            bool validPosition;
+            Vector3 hatchPosition = hatches[0].transform.position; 
+
+            do
+            {
+                validPosition = true;
+                randomPosition = new Vector3(
+                    UnityEngine.Random.Range(0, dungeonWidth),
+                    0,
+                    UnityEngine.Random.Range(0, dungeonLength)
+                );
+
+                // Check distance from all wall positions
                 foreach (var wallPosition in possibleWallHorizontalPosition)
-            {
-                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
-                {
-                    validPosition = false;
-                    break;
-                }
-            }
-
-            if (validPosition)
-            {
-                foreach (var wallPosition in possibleWallVerticalPosition)
                 {
                     if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
                     {
@@ -295,88 +225,58 @@ private void SpawnProps()
                         break;
                     }
                 }
-            }
 
-            // Check distance from the hatch
-            if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
-            {
-                validPosition = false;
-                break;
-            }
-             // Check distance from the props
-            if (Vector3.Distance(randomPosition, propPosition) < minDistanceFromProp)
-            {
-                validPosition = false;
-                break;
-            }
-            if (validPosition && torches.Count > 0)
-            {
+                if (validPosition)
+                {
+                    foreach (var wallPosition in possibleWallVerticalPosition)
+                    {
+                        if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                        {
+                            validPosition = false;
+                            break;
+                        }
+                    }
+                }
                 
-                // Check distance from the other torches
-                foreach (var torch in torches)
+                if (validPosition)
                 {
-                    torchPosition = torches[0].transform.position;
-                    if (Vector3.Distance(randomPosition, torchPosition) < minDistanceFromTorch)
+                    if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
                     {
                         validPosition = false;
-                        break;
                     }
                 }
-            }
-            
-        
-        } while (!validPosition);
+            } while (!validPosition);
 
-        if (validPosition)
-        {
-            GameObject randomTorchPrefab = torchPrefabs[UnityEngine.Random.Range(0, torchPrefabs.Count)];
-            GameObject torch = Instantiate(randomTorchPrefab, randomPosition, Quaternion.identity);
-            torches.Add(torch);
+            GameObject randomPropPrefab = propPrefabs[UnityEngine.Random.Range(0, propPrefabs.Count)];
+            GameObject prop = Instantiate(randomPropPrefab, randomPosition, Quaternion.identity);
+            props.Add(prop);
         }
-     
     }
-}
 
-private void DestroyTorches()
-{
-    foreach (var torch in torches)
+    public void SpawnTorches()
     {
-        Destroy(torch);
-    }
-    torches.Clear();
-}
-private void SpawnHatch()
-{
-    minDistanceFromWall = 4.5f;
+        minDistanceFromWall = 5.0f;
+        minDistanceFromHatch = 5.0f;
+        minDistanceFromProp = 2.0f;
+        minDistanceFromTorch = 10.0f;
 
-
-    for (int i = 0; i < numberOfHatches; i++)
-    {
-        Vector3 randomPosition;
-        bool validPosition;
-
-        do
+        for (int i = 0; i < numberOfTorches; i++)
         {
-            validPosition = true;
-            randomPosition = new Vector3(
-                UnityEngine.Random.Range(0, dungeonWidth),
-                0,
-                UnityEngine.Random.Range(0, dungeonLength)
-            );
+            Vector3 randomPosition;
+            bool validPosition;
+            Vector3 hatchPosition = hatches[0].transform.position;
+            Vector3 propPosition = props[0].transform.position;
+            Vector3 torchPosition;
 
-            // Check distance from all wall positions
-            foreach (var wallPosition in possibleWallHorizontalPosition)
+            do
             {
-                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
-                {
-                    validPosition = false;
-                    break;
-                }
-            }
-
-            if (validPosition)
-            {
-                foreach (var wallPosition in possibleWallVerticalPosition)
+                validPosition = true;
+                randomPosition = new Vector3(
+                    UnityEngine.Random.Range(0, dungeonWidth),
+                    0,
+                    UnityEngine.Random.Range(0, dungeonLength)
+                );
+                foreach (var wallPosition in possibleWallHorizontalPosition)
                 {
                     if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
                     {
@@ -384,35 +284,131 @@ private void SpawnHatch()
                         break;
                     }
                 }
+
+                if (validPosition)
+                {
+                    foreach (var wallPosition in possibleWallVerticalPosition)
+                    {
+                        if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                        {
+                            validPosition = false;
+                            break;
+                        }
+                    }
+                }
+
+                // Check distance from the hatch
+                if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
+                {
+                    validPosition = false;
+                    break;
+                }
+                // Check distance from the props
+                if (Vector3.Distance(randomPosition, propPosition) < minDistanceFromProp)
+                {
+                    validPosition = false;
+                    break;
+                }
+                if (validPosition && torches.Count > 0)
+                {
+                    // Check distance from the other torches
+                    foreach (var torch in torches)
+                    {
+                        torchPosition = torches[0].transform.position;
+                        if (Vector3.Distance(randomPosition, torchPosition) < minDistanceFromTorch)
+                        {
+                            validPosition = false;
+                            break;
+                        }
+                    }
+                }
+            } while (!validPosition);
+
+            if (validPosition)
+            {
+                GameObject randomTorchPrefab = torchPrefabs[UnityEngine.Random.Range(0, torchPrefabs.Count)];
+                GameObject torch = Instantiate(randomTorchPrefab, randomPosition, Quaternion.identity);
+                torches.Add(torch);
             }
-        } while (!validPosition);
-
-        GameObject randomHatchPrefab = hatchPrefabs[UnityEngine.Random.Range(0, hatchPrefabs.Count)];
-        GameObject hatch = Instantiate(randomHatchPrefab, randomPosition, Quaternion.identity);
-        hatches.Add(hatch);
+        }
     }
-}
 
-private void DestroyProps()
-{
-    foreach (var prop in props)
+    private void DestroyTorches()
     {
-        Destroy(prop);
+        foreach (var torch in torches)
+        {
+            Destroy(torch);
+        }
+        torches.Clear();
     }
-    props.Clear();
-}
-private void DestroyHatch()
-{
-    foreach (var hatch in hatches)
+
+    private void SpawnHatch()
     {
-        Destroy(hatch);
+        minDistanceFromWall = 4.5f;
+
+        for (int i = 0; i < numberOfHatches; i++)
+        {
+            Vector3 randomPosition;
+            bool validPosition;
+
+            do
+            {
+                validPosition = true;
+                randomPosition = new Vector3(
+                    UnityEngine.Random.Range(0, dungeonWidth),
+                    0,
+                    UnityEngine.Random.Range(0, dungeonLength)
+                );
+
+                // Check distance from all wall positions
+                foreach (var wallPosition in possibleWallHorizontalPosition)
+                {
+                    if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                    {
+                        validPosition = false;
+                        break;
+                    }
+                }
+
+                if (validPosition)
+                {
+                    foreach (var wallPosition in possibleWallVerticalPosition)
+                    {
+                        if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                        {
+                            validPosition = false;
+                            break;
+                        }
+                    }
+                }
+            } while (!validPosition);
+
+            GameObject randomHatchPrefab = hatchPrefabs[UnityEngine.Random.Range(0, hatchPrefabs.Count)];
+            GameObject hatch = Instantiate(randomHatchPrefab, randomPosition, Quaternion.identity);
+            hatches.Add(hatch);
+        }
     }
 
-    hatches.Clear();
-}
+    private void DestroyProps()
+    {
+        foreach (var prop in props)
+        {
+            Destroy(prop);
+        }
+        props.Clear();
+    }
 
+    private void DestroyHatch()
+    {
+        foreach (var hatch in hatches)
+        {
+            Destroy(hatch);
+        }
 
- private void DestroyNPCS()
+        hatches.Clear();
+    }
+
+    private void DestroyNPCS()
     {
         foreach (var npc in npcs)
         {
@@ -420,6 +416,7 @@ private void DestroyHatch()
         }
         npcs.Clear();
     }
+
     private void CreateWalls(GameObject wallParent)
     {
         foreach (var wallPosition in possibleWallHorizontalPosition)
@@ -523,7 +520,7 @@ private void DestroyHatch()
         {
             foreach(Transform item in transform)
             {
-                DestroyImmediate(item.gameObject);
+                Destroy(item.gameObject);
             }
         }
     }

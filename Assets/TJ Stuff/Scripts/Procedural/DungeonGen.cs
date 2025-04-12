@@ -6,8 +6,8 @@ public class DungeonGen
 {
     
     List<RoomNode> allNodesCollection = new List<RoomNode>();
-    private int dungeonWidth;
-    private int dungeonLength;
+    public int dungeonWidth;
+    public int dungeonLength;
 
     public DungeonGen(int dungeonWidth, int dungeonLength)
     {

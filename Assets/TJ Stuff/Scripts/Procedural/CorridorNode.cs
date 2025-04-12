@@ -7,7 +7,7 @@ public class CorridorNode : Node
 {
     private Node structure1;
     private Node structure2;
-    private int corridorWidth;
+    public int corridorWidth;
     private int modifierDistanceFromWall=1;
 
     public CorridorNode(Node node1, Node node2, int corridorWidth) : base(null)

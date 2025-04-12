@@ -8,7 +8,6 @@ public class Singleton : MonoBehaviour
     public int levelsComplete;
     public DungeonCreator dungeonCreator;
 
-    [System.Obsolete]
     void Awake()
     {
         if (singleton == null)
@@ -18,16 +17,15 @@ public class Singleton : MonoBehaviour
         }
         if (dungeonCreator == null)
         {
-            dungeonCreator = FindObjectOfType<DungeonCreator>();
+            dungeonCreator = FindFirstObjectByType<DungeonCreator>();
         }
     }
 
-    [System.Obsolete]
     void Update()
     {
-           if (dungeonCreator == null)
+        if (dungeonCreator == null)
         {
-            dungeonCreator = FindObjectOfType<DungeonCreator>();
+            dungeonCreator = FindFirstObjectByType<DungeonCreator>();
         }
     }
   public void AddSingleton(int v)

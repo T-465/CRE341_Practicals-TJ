@@ -10,14 +10,13 @@ public class HatchOpen : MonoBehaviour
     public GameObject[] ghosts;
     public bool allGhostsDead;
 
-    [System.Obsolete]
     void Start()
     {
         animator = GetComponent<Animator>();
         animator.SetBool("Opening", false);
         if (singleton == null)
         {
-            singleton = FindObjectOfType<Singleton>();
+            singleton = FindFirstObjectByType<Singleton>();
         }
 
     }
