@@ -15,23 +15,16 @@ public class Singleton : MonoBehaviour
             singleton = this;
             DontDestroyOnLoad(this);
         }
+
         if (dungeonCreator == null)
         {
             dungeonCreator = FindFirstObjectByType<DungeonCreator>();
         }
     }
 
-    void Update()
+    public void AddSingleton(int v)
     {
-        if (dungeonCreator == null)
-        {
-            dungeonCreator = FindFirstObjectByType<DungeonCreator>();
-        }
+        overallScore += v;
     }
-  public void AddSingleton(int v)
-
-  {
-    overallScore += v;
-  }
 }
 

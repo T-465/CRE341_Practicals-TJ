@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class DungeonCreator : MonoBehaviour
 {
 
@@ -62,7 +62,15 @@ public class DungeonCreator : MonoBehaviour
         {
             singleton = FindFirstObjectByType<Singleton>();
         }
-        StartCoroutine(CreateDungeonAsync());
+
+        if (singleton != null)
+        {
+            StartCoroutine(CreateDungeonAsync());
+        }
+        else
+        {
+            Debug.LogError("Singleton instance not found. Dungeon creation aborted.");
+        }
     }
 
     public IEnumerator CreateDungeonAsync()
