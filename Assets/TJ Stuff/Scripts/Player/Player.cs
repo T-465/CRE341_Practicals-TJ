@@ -7,19 +7,17 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    // Script controlling aspects of the player such as movement, health and damage
-
-
     [SerializeField] public int playerHealth = 10;
     public UI ui;
     [SerializeField] public float speed;
     public CharacterController cc;
     public PlayerInput playerinput;
     public GameObject dungeonCreator;
+    public MouseLook mouseLook;
    
-
     public void Awake()
     {
+
         cc = GetComponent<CharacterController>();
         ui = GameObject.Find("UI").GetComponent<UI>();
 
@@ -52,9 +50,8 @@ public class Player : MonoBehaviour, IDamageable
         {
             return; 
         }
-
         playerHealth -= damage;
-        playerHealth = Mathf.Max(playerHealth, 0); 
+     
         ui.LoseHealth(damage);
 
         if (playerHealth <= 0)
@@ -70,6 +67,9 @@ public class Player : MonoBehaviour, IDamageable
         Time.timeScale = 0f;
         dungeonCreator.SetActive(false);
         ui.gameOverScreen.SetActive(true);
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+      
    
     
     }
