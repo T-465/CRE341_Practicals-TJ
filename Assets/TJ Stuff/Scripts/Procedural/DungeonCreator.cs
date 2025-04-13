@@ -36,7 +36,8 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] List<GameObject> torches = new List<GameObject>();
     [SerializeField] List<GameObject> torchPrefabs = new List<GameObject>();
   
-
+  
+    [SerializeField] GameObject playerSpawn;
 
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
@@ -60,24 +61,34 @@ public class DungeonCreator : MonoBehaviour
     public NavMeshSurface navMeshSurface;
     void Start()
     {
-        
-        if (singleton == null)
-        {
-            singleton = GameObject.FindWithTag("singleton").GetComponent<Singleton>();
-        }
-        
+        StartCoroutine(WaitForSingletonAndInitialize());
+    }
 
-        // Ensure parameters are set before creating the dungeon
+    private IEnumerator WaitForSingletonAndInitialize()
+    {
+        while (Singleton.singleton == null)
+        {
+            Debug.LogWarning("Wait for Singleton");
+            yield return null;
+        }
+
+        singleton = Singleton.singleton;
+
+
         InitializeDungeonParameters();
         StartCoroutine(CreateDungeon());
     }
 
     public void InitializeDungeonParameters()
     {
+        if (singleton == null)
+        {
+            singleton = GameObject.FindWithTag("singleton").GetComponent<Singleton>();
+        }
         if (singleton.levelsComplete == 0)
         {
             numberofProps = 10;
-            numberofNPCs = 6;
+            numberofNPCs = 5;
             numberofTorches = 5;
             dungeonWidth = 50;
             dungeonLength = 40;
@@ -179,6 +190,7 @@ public class DungeonCreator : MonoBehaviour
         SpawnHatch();
         SpawnProps();
         SpawnTorches();
+        SpawnPlayer();
     
     }
     private void SpawnNPCs()
@@ -350,6 +362,95 @@ private void DestroyTorches()
     }
     torches.Clear();
 }
+public void SpawnPlayer()
+{
+    minDistanceFromWall = 5.0f;
+    minDistanceFromHatch = 1.0f;
+    minDistanceFromProp = 2.0f;
+    minDistanceFromTorch = 3.0f;
+
+    Vector3 randomPosition;
+    bool validPosition;
+
+    do
+    {
+        validPosition = true;
+        randomPosition = new Vector3(
+            UnityEngine.Random.Range(0, dungeonWidth),
+            0,
+            UnityEngine.Random.Range(0, dungeonLength)
+        );
+
+        // Check distance from all wall positions
+        foreach (var wallPosition in possibleWallHorizontalPosition)
+        {
+            if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+            {
+                validPosition = false;
+                break;
+            }
+        }
+
+        if (validPosition)
+        {
+            foreach (var wallPosition in possibleWallVerticalPosition)
+            {
+                if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+        }
+
+        // Check distance from the hatch
+        if (validPosition && hatches.Count > 0)
+        {
+            Vector3 hatchPosition = hatches[0].transform.position;
+            if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
+            {
+                validPosition = false;
+            }
+        }
+
+        // Check distance from the props
+        if (validPosition && props.Count > 0)
+        {
+            foreach (var prop in props)
+            {
+                if (Vector3.Distance(randomPosition, prop.transform.position) < minDistanceFromProp)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+        }
+
+        // Check distance from the torches
+        if (validPosition && torches.Count > 0)
+        {
+            foreach (var torch in torches)
+            {
+                if (Vector3.Distance(randomPosition, torch.transform.position) < minDistanceFromTorch)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+        }
+
+    } while (!validPosition);
+    if (playerSpawn != null)
+    {
+        Instantiate(playerSpawn, randomPosition, Quaternion.identity);
+        Debug.Log($"Player spawned at {randomPosition}");
+    }
+    else
+    {
+        Debug.LogError("Player prefab not assigned");
+    }
+}
+
 private void SpawnHatch()
 {
     minDistanceFromWall = 4.5f;

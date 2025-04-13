@@ -8,17 +8,26 @@ public class Singleton : MonoBehaviour
     public int overallScore;
     public int levelsComplete;
     public DungeonCreator dungeonCreator;
+
     void Awake()
     {
-        levelsComplete = 0;
         if (singleton == null)
         {
             singleton = this;
             DontDestroyOnLoad(this);
         }
+        else if (singleton != this)
+        {
+            Debug.Log("Singleton already exists. Destroying this");
+            Destroy(gameObject);
+            return;
+        }
+
+        
+
         if (dungeonCreator == null)
         {
-            dungeonCreator = GameObject.FindWithTag("DunGen").GetComponent<DungeonCreator>();
+            dungeonCreator = GameObject.FindWithTag("DunGen")?.GetComponent<DungeonCreator>();
         }
     }
 
@@ -26,7 +35,7 @@ public class Singleton : MonoBehaviour
     {
         if (dungeonCreator == null)
         {
-            dungeonCreator = GameObject.FindWithTag("DunGen").GetComponent<DungeonCreator>();
+            dungeonCreator = GameObject.FindWithTag("DunGen")?.GetComponent<DungeonCreator>();
         }
     }
 
@@ -42,7 +51,7 @@ public class Singleton : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-       Start();
+        Start();
     }
 
     public void AddSingleton(int v)

@@ -34,7 +34,7 @@ public class AIBase : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+  
         agent = GetComponent<NavMeshAgent>();
 
         ui = GameObject.Find("UI").GetComponent<UI>();
@@ -42,13 +42,23 @@ public class AIBase : MonoBehaviour
 
     private void Start()
     {
-        SetState(new EnemyState_Idle());
-        Invoke("LocatePlayer", 1f);
-    }
+        player = null;
 
+        StartCoroutine(WaitForPlayer());
+    }
+    public IEnumerator WaitForPlayer()
+    {
+        yield return new WaitForSeconds(2f);
+          if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            SetState(new EnemyState_Idle());
+            Invoke("LocatePlayer", 1f);
+        }
+    }
     private void OnEnable()
     {
-        SetState(new EnemyState_Idle());
+     
     }
 
     private void OnDisable()
@@ -76,8 +86,12 @@ public class AIBase : MonoBehaviour
         {
             SetState(new EnemyState_Dead());
         }
-
-        DetectPlayerInRadius();
+        if (player != null)
+        {
+            DetectPlayerInRadius();
+        
+        }
+       
     }
 
     public void DetectPlayerInRadius()
