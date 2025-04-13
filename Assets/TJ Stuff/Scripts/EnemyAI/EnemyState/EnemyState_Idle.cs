@@ -22,10 +22,11 @@ public class EnemyState_Idle : IEnemyState
 
         if (aiBase.player == null) return;
 
-        if (aiBase.playerDetected)
+        if (aiBase.playerDetected && aiBase.onCooldown == false)
         {
             aiBase.SetState(new EnemyState_Chase());
         }
+   
 
         Debug.Log("AIIdle");
     }

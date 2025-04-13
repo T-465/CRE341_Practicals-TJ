@@ -14,6 +14,7 @@ public class AIBase : MonoBehaviour
 
     private IEnemyState currentState;
     public Transform player;
+    public Player playerScript;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -23,6 +24,8 @@ public class AIBase : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     public bool isDying;
+    public bool onCooldown;
+    public BoxCollider boxCollider;
 
     public UI ui;
 
@@ -43,6 +46,7 @@ public class AIBase : MonoBehaviour
 
         ui = GameObject.Find("UI").GetComponent<UI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     private void Start()
@@ -57,17 +61,10 @@ public class AIBase : MonoBehaviour
           if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerScript = player.GetComponent<Player>();
             SetState(new EnemyState_Idle());
             Invoke("LocatePlayer", 1f);
         }
-    }
-    private void OnEnable()
-    {
-     
-    }
-
-    private void OnDisable()
-    {
     }
 
     private void Update()
@@ -80,11 +77,11 @@ public class AIBase : MonoBehaviour
         }
         if (isDying)
         {
-            killcountdown -= Time.deltaTime;
+            killcountdown -= Time.fixedDeltaTime;
         }
         if (!isDying && killcountdown < 2)
         {
-            killcountdown += Time.deltaTime;
+            killcountdown += Time.fixedDeltaTime;
         }
 
         if (killcountdown <= 0)
@@ -151,15 +148,24 @@ public class AIBase : MonoBehaviour
             isDying = false;
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+         if (collision.gameObject.tag == "Player")
+        {
+            SetState(new EnemyState_Attack());
+
+        }
+        
+    }
 
     public void PatrolPoints()
     {
-         if (agent.remainingDistance <= agent.stoppingDistance) //done with path
+         if (agent.remainingDistance <= agent.stoppingDistance) 
         {
             
-            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(centrePoint.position, range, out point)) 
             {
-                Debug.DrawRay(point, Vector3.up, Color.red, 1.0f); //so you can see with gizmos
+                Debug.DrawRay(point, Vector3.up, Color.red, 1.0f);
                 agent.SetDestination(point);
             }
         }
@@ -181,10 +187,23 @@ public class AIBase : MonoBehaviour
         
         StartCoroutine(DestroyEnemy());
     }
+    public void AttackCool()
+    {
+        StartCoroutine(AttackCooldown());
+    }
     public IEnumerator DestroyEnemy()
     {
         yield return new WaitForSeconds(0.3f);
         ui.AddScore(1);
         gameObject.SetActive(false);
+    }
+        public IEnumerator AttackCooldown()
+    {
+        SetState(new EnemyState_Idle());
+        boxCollider.enabled = false;
+        onCooldown = true;
+        yield return new WaitForSeconds(3f);
+        onCooldown = false;
+        boxCollider.enabled = true;
     }
 }

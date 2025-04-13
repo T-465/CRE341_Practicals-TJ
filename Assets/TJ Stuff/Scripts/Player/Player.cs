@@ -10,7 +10,9 @@ public class Player : MonoBehaviour, IDamageable
     // Script controlling aspects of the player such as movement, health and damage
 
 
-    [SerializeField] public int playerHealth = 3;
+    [SerializeField] public int playerHealth;
+    public UI ui;
+
     [SerializeField] public float speed;
     public CharacterController cc;
     public PlayerInput playerinput;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour, IDamageable
     public void Awake()
     {
         cc = GetComponent<CharacterController>();
+        ui = GameObject.Find("UI").GetComponent<UI>();
 
     }
     private void FixedUpdate()
@@ -46,15 +49,17 @@ public class Player : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        ui.LoseHealth(damage);
         if (playerHealth <= 0)
         {
-          
-            
+            playerHealth = 0;
+            //GameOver();
         }
         else if (playerHealth > 0)
         {
-         
+          
         }
+    
 
     }
     public void OnGameOver() 

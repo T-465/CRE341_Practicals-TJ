@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 5446477390807014372}
   - component: {fileID: 6765726119930354159}
   - component: {fileID: 2662670534933168363}
+  - component: {fileID: 2309954508313931751}
   m_Layer: 0
   m_Name: LittleGhost_LP (5)
   m_TagString: Ghost
@@ -297,10 +298,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -322,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6765726119930354159}
   player: {fileID: 0}
+  playerScript: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -334,6 +336,8 @@ MonoBehaviour:
   animator: {fileID: 2359260613066515245}
   spriteRenderer: {fileID: 2806061460026610757}
   isDying: 0
+  onCooldown: 0
+  boxCollider: {fileID: 0}
   ui: {fileID: 0}
   patrolPoints: []
   centrePoint: {fileID: 8893622654124738828}
@@ -341,6 +345,27 @@ MonoBehaviour:
   point: {x: 0, y: 0, z: 0}
   detectionRadius: 5
   playerDetected: 0
+--- !u!65 &2309954508313931751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5446477390807014373}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.27308547, y: 0.69594955, z: 0.34758455}
+  m_Center: {x: 0.0035458207, y: 0.3600214, z: 0.016969614}
 --- !u!1 &5446477390958229031
 GameObject:
   m_ObjectHideFlags: 0
