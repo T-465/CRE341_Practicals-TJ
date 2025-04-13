@@ -18,6 +18,10 @@ public class AIBase : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float killcountdown = 2;
+    public GameObject model;
+    public GameObject additionalModel;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
     public bool isDying;
 
     public UI ui;
@@ -38,6 +42,7 @@ public class AIBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         ui = GameObject.Find("UI").GetComponent<UI>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -170,5 +175,16 @@ public class AIBase : MonoBehaviour
     
         result = Vector3.zero;
         return false;
+    }
+    public void DeactivateEnemy()
+    {
+        
+        StartCoroutine(DestroyEnemy());
+    }
+    public IEnumerator DestroyEnemy()
+    {
+        yield return new WaitForSeconds(0.3f);
+        ui.AddScore(1);
+        gameObject.SetActive(false);
     }
 }

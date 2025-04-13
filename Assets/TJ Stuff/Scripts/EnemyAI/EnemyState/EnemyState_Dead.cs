@@ -5,15 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyState_Dead : IEnemyState
 {
-   
-
     public void Enter(AIBase aiBase)
     {
         Debug.Log("Entering Dead State");
         aiBase.agent.speed = 0;
+
+        aiBase.model.SetActive(false);
+        aiBase.additionalModel.SetActive(false);
+        aiBase.animator.SetBool("Dead", true);
         aiBase.agent.Stop();
-        aiBase.ui.AddScore(1);
-        aiBase.gameObject.SetActive(false);
+        aiBase.DeactivateEnemy();
     }
 
     public void Update(AIBase aiBase)
