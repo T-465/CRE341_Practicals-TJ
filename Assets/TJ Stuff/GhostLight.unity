@@ -29498,6 +29498,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002353526}
   m_Mesh: {fileID: 7444979532302926841, guid: 132c7c866fa1f304280994c01e889d2e, type: 3}
+--- !u!1 &1004648655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5721432679530022689, guid: 9b400c9850b70044d992fd18de0e9358, type: 3}
+  m_PrefabInstance: {fileID: 3065690557579284122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1005291581
 GameObject:
   m_ObjectHideFlags: 0
@@ -37798,6 +37803,7 @@ MonoBehaviour:
   torchPrefabs:
   - {fileID: 5361079049285645862, guid: dfc83be784d9f7441b596e917795ca44, type: 3}
   playerSpawn: {fileID: 6060709698414939326, guid: 4b455a504aea56942b56836b3628c1fe, type: 3}
+  start: 0
   minDistanceFromWall: 0
   minDistanceFromHatch: 0
   minDistanceFromProp: 0
@@ -64959,6 +64965,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4188644312573332346, guid: 9b400c9850b70044d992fd18de0e9358, type: 3}
+      propertyPath: gameOverScreen
+      value: 
+      objectReference: {fileID: 1004648655}
     - target: {fileID: 6271817613525176326, guid: 9b400c9850b70044d992fd18de0e9358, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3092.1501

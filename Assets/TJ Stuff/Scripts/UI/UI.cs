@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class UI : MonoBehaviour
@@ -11,10 +12,22 @@ public class UI : MonoBehaviour
     public int currentScore;
     public int levelScore;
     public Singleton singleton;
+    public GameObject gameOverScreen;
+    public DungeonCreator dungeonCreator;
 
 public void Awake() 
 {
   singleton = GameObject.Find("Singleton").GetComponent<Singleton>();
+  dungeonCreator = GameObject.FindWithTag("DunGen")?.GetComponent<DungeonCreator>();
+  gameOverScreen.SetActive(true);
+  StartCoroutine(LoadScreen());
+}
+public IEnumerator LoadScreen()
+{
+  
+    yield return new WaitUntil(() => dungeonCreator.start == true);
+    gameOverScreen.SetActive(false);
+    yield return null;
 }
 
     private void Start()

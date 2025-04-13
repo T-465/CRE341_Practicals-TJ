@@ -38,6 +38,7 @@ public class DungeonCreator : MonoBehaviour
   
   
     [SerializeField] GameObject playerSpawn;
+    public bool start;
 
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
@@ -73,6 +74,7 @@ public class DungeonCreator : MonoBehaviour
         }
 
         singleton = Singleton.singleton;
+        start = false;
 
 
         InitializeDungeonParameters();
@@ -444,6 +446,7 @@ public void SpawnPlayer()
     {
         Instantiate(playerSpawn, randomPosition, Quaternion.identity);
         Debug.Log($"Player spawned at {randomPosition}");
+        start = true;
     }
     else
     {

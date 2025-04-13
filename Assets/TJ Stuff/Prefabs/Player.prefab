@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 3
+  ui: {fileID: 0}
   speed: 300
   cc: {fileID: 2769612486890711022}
   playerinput: {fileID: 300001363803796186}
@@ -423,6 +424,10 @@ PrefabInstance:
       propertyPath: playerinput
       value: 
       objectReference: {fileID: 300001363803796186}
+    - target: {fileID: 3788963888264959819, guid: d86ca2f4159e6a942abd8dfc52b38395, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
