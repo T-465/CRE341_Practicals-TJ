@@ -10,23 +10,23 @@ public class Player : MonoBehaviour, IDamageable
     // Script controlling aspects of the player such as movement, health and damage
 
 
-    [SerializeField] public int playerHealth;
+    [SerializeField] public int playerHealth = 10;
     public UI ui;
-
     [SerializeField] public float speed;
     public CharacterController cc;
     public PlayerInput playerinput;
+    public GameObject dungeonCreator;
    
-    
-
-
-    
 
     public void Awake()
     {
         cc = GetComponent<CharacterController>();
         ui = GameObject.Find("UI").GetComponent<UI>();
 
+    }
+    public void Start()
+    {
+        dungeonCreator = GameObject.FindWithTag("DunGen");
     }
     private void FixedUpdate()
     {
@@ -48,24 +48,37 @@ public class Player : MonoBehaviour, IDamageable
     #region Damage
     public void TakeDamage(int damage)
     {
-        playerHealth -= damage;
-        ui.LoseHealth(damage);
         if (playerHealth <= 0)
         {
-            playerHealth = 0;
-            //GameOver();
+            return; 
         }
-        else if (playerHealth > 0)
-        {
-          
-        }
-    
 
+        playerHealth -= damage;
+        playerHealth = Mathf.Max(playerHealth, 0); 
+        ui.LoseHealth(damage);
+
+        if (playerHealth <= 0)
+        {
+            OnGameOver();
+        }
     }
     public void OnGameOver() 
     { 
+        
+        speed = 0;
+        cc.enabled = false;
+        Time.timeScale = 0f;
+        dungeonCreator.SetActive(false);
+        ui.gameOverScreen.SetActive(true);
    
     
+    }
+    void Update()
+    {
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+        }
     }
     public void ShowHitEffect()
     {

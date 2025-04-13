@@ -227,11 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fcd3785abd039e42bad11a316554f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 3
+  playerHealth: 10
   ui: {fileID: 0}
   speed: 300
   cc: {fileID: 2769612486890711022}
   playerinput: {fileID: 300001363803796186}
+  dungeonCreator: {fileID: 0}
 --- !u!114 &300001363803796186
 MonoBehaviour:
   m_ObjectHideFlags: 0

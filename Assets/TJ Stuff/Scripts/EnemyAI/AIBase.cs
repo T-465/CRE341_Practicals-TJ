@@ -25,6 +25,7 @@ public class AIBase : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public bool isDying;
     public bool isDead;
+    public bool isAttacking;
     public bool onCooldown;
     public BoxCollider boxCollider;
 
@@ -159,12 +160,12 @@ public class AIBase : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-         if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !onCooldown && !isDead)
         {
             SetState(new EnemyState_Attack());
-
+            onCooldown = true; // Start cooldown to prevent rapid attacks
+            StartCoroutine(AttackCooldown());
         }
-        
     }
 
     public void PatrolPoints()
@@ -209,12 +210,16 @@ public class AIBase : MonoBehaviour
     }
         public IEnumerator AttackCooldown()
     {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        agent.ResetPath();
         SetState(new EnemyState_Idle());
         boxCollider.enabled = false;
         onCooldown = true;
         yield return new WaitForSeconds(3f);
         onCooldown = false;
         boxCollider.enabled = true;
+        isAttacking = false;
     }
         public void PlaySFX (string name)
     {

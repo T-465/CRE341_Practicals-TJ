@@ -1,5 +1,7 @@
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class UI : MonoBehaviour
     public int currentScore;
     public int levelScore;
     public Singleton singleton;
+    public GameObject loadingScreen;
     public GameObject gameOverScreen;
     public DungeonCreator dungeonCreator;
 
@@ -19,14 +22,16 @@ public void Awake()
 {
   singleton = GameObject.Find("Singleton").GetComponent<Singleton>();
   dungeonCreator = GameObject.FindWithTag("DunGen")?.GetComponent<DungeonCreator>();
-  gameOverScreen.SetActive(true);
+  gameOverScreen.SetActive(false);
+  loadingScreen.SetActive(true);
+
   StartCoroutine(LoadScreen());
 }
 public IEnumerator LoadScreen()
 {
   
     yield return new WaitUntil(() => dungeonCreator.start == true);
-    gameOverScreen.SetActive(false);
+    loadingScreen.SetActive(false);
     yield return null;
 }
 
@@ -63,6 +68,14 @@ public IEnumerator LoadScreen()
         healthPoints = 10;
         score.text = "x" + currentScore.ToString();
         health.text = "Health: " + healthPoints.ToString();
+    }
+    public void Restart()
+    {
+      singleton.levelsComplete = 0;
+      singleton.overallScore = 0;
+      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    
+        
     }
 
 }
