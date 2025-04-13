@@ -24,6 +24,7 @@ public class AIBase : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     public bool isDying;
+    public bool isDead;
     public bool onCooldown;
     public BoxCollider boxCollider;
 
@@ -38,6 +39,10 @@ public class AIBase : MonoBehaviour
     [Header("Detection Settings")]
     public float detectionRadius = 5f;   
     public bool playerDetected;
+    [Header("Audio")]
+    public Sound[] audioClips;
+    public AudioSource audioSource;
+
 
     private void Awake()
     {
@@ -47,11 +52,13 @@ public class AIBase : MonoBehaviour
         ui = GameObject.Find("UI").GetComponent<UI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider>();
+        
     }
 
     private void Start()
     {
         player = null;
+        isDead = false;
 
         StartCoroutine(WaitForPlayer());
     }
@@ -84,16 +91,18 @@ public class AIBase : MonoBehaviour
             killcountdown += Time.fixedDeltaTime;
         }
 
-        if (killcountdown <= 0)
+        // Transition to Dead state only if killcountdown reaches 0 and the enemy is not already dead
+        if (killcountdown <= 0 && !isDead)
         {
+            killcountdown = 2;
+            isDying = false;
             SetState(new EnemyState_Dead());
         }
+
         if (player != null)
         {
             DetectPlayerInRadius();
-        
         }
-       
     }
 
     public void DetectPlayerInRadius()
@@ -192,8 +201,9 @@ public class AIBase : MonoBehaviour
         StartCoroutine(AttackCooldown());
     }
     public IEnumerator DestroyEnemy()
-    {
-        yield return new WaitForSeconds(0.3f);
+    {  yield return new WaitForSeconds(0.3f);
+       animator.SetBool("Dead", false);
+        yield return new WaitForSeconds(0.4f);
         ui.AddScore(1);
         gameObject.SetActive(false);
     }
@@ -205,5 +215,12 @@ public class AIBase : MonoBehaviour
         yield return new WaitForSeconds(3f);
         onCooldown = false;
         boxCollider.enabled = true;
+    }
+        public void PlaySFX (string name)
+    {
+        Sound s = System.Array.Find(audioClips, sound => sound.name == name);
+        if (s == null) return;
+        audioSource.clip = s.clip;
+        audioSource.Play();
     }
 }
