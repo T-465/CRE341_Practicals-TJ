@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 10
   ui: {fileID: 0}
-  speed: 300
+  speed: 200
   cc: {fileID: 2769612486890711022}
   playerinput: {fileID: 300001363803796186}
   dungeonCreator: {fileID: 0}

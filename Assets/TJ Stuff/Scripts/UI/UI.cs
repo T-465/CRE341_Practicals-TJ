@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     public int levelScore;
     public TMPro.TextMeshProUGUI finalScoreText;
     public Singleton singleton;
+    public AudioManager audioManager;
     public GameObject loadingScreen;
     public GameObject gameOverScreen;
     public DungeonCreator dungeonCreator;
@@ -39,13 +40,16 @@ public IEnumerator LoadScreen()
 
     private void Start()
     {
+      if (audioManager == null)
+      {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+      }
         currentScore = 0;
         healthPoints = 10;
         health.text = "Health: " + healthPoints.ToString();
         score.text = "x" + currentScore.ToString();
     }
   public void AddScore(int v)
-
   {
     currentScore += v;
     score.text = "x" + currentScore.ToString();
@@ -70,6 +74,8 @@ public IEnumerator LoadScreen()
   }
   public void Tally()
   {
+    audioManager.PlayMusic("Dead Theme");
+
     gameUI.SetActive(false);
 
      finalScoreText.text = "Your Final Score was: " + singleton.overallScore.ToString();
@@ -86,7 +92,7 @@ public IEnumerator LoadScreen()
     {
       singleton.levelsComplete = 0;
       singleton.overallScore = 0;
-      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+      SceneManager.LoadScene("Main Menu");
     
         
     }

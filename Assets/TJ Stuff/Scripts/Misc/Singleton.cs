@@ -9,6 +9,8 @@ public class Singleton : MonoBehaviour
     public int levelsComplete;
     public DungeonCreator dungeonCreator;
 
+
+
     void Awake()
     {
         if (singleton == null)
@@ -37,6 +39,11 @@ public class Singleton : MonoBehaviour
         {
             dungeonCreator = GameObject.FindWithTag("DunGen")?.GetComponent<DungeonCreator>();
         }
+        if (ui == null)
+        {
+            ui = GameObject.Find("UI")?.GetComponent<UI>();
+        }
+
     }
 
     void OnEnable()
@@ -58,5 +65,6 @@ public class Singleton : MonoBehaviour
     {
         overallScore += v;
     }
+
 }
 

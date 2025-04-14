@@ -65,4 +65,13 @@ public class AudioManager : MonoBehaviour
         
 
     }
+       void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 }

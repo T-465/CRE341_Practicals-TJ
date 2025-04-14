@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonCreator : MonoBehaviour 
 {
@@ -20,7 +21,6 @@ public class DungeonCreator : MonoBehaviour
     public GameObject wallVertical, wallHorizontal;
 
     #region NPCSpawning
-    public GameObject npcPrefab, waypointsPrefab;
 	[SerializeField] List<GameObject> npcs = new List<GameObject>();
     [SerializeField] List<GameObject> npcPrefabs = new List<GameObject>();
 
@@ -186,6 +186,7 @@ public class DungeonCreator : MonoBehaviour
         DestroyHatch();
         DestroyProps();
         DestroyTorches();
+        DestroyPlayer();
        
         navMeshSurface.BuildNavMesh();
         SpawnNPCs();
@@ -519,6 +520,14 @@ private void DestroyHatch()
 
     hatches.Clear();
 }
+private void DestroyPlayer()
+{
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    if (player != null)
+    {
+        Destroy(player);
+    }
+}
 
 
  private void DestroyNPCS()
@@ -636,4 +645,18 @@ private void DestroyHatch()
             }
         }
     }
+       void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Start();
+    }
+
 }

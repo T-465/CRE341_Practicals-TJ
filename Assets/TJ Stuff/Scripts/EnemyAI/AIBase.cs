@@ -91,8 +91,6 @@ public class AIBase : MonoBehaviour
         {
             killcountdown += Time.fixedDeltaTime;
         }
-
-        // Transition to Dead state only if killcountdown reaches 0 and the enemy is not already dead
         if (killcountdown <= 0 && !isDead)
         {
             killcountdown = 2;
@@ -158,10 +156,12 @@ public class AIBase : MonoBehaviour
             isDying = false;
         }
     }
-    void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player" && !onCooldown && !isDead)
         {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
             agent.ResetPath();
             SetState(new EnemyState_Attack());
             onCooldown = true; // Start cooldown to prevent rapid attacks

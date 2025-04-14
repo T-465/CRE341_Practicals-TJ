@@ -10,7 +10,7 @@ public class EnemyState_Chase :  IEnemyState
     {
         Debug.Log("Entering Chase State");
         aiBase.agent.speed = 6;
-        aiBase.agent.Resume();
+        aiBase.agent.autoBraking = false;
         aiBase.agent.isStopped = false;
     }
     public void Update(AIBase aiBase)
@@ -21,13 +21,10 @@ public class EnemyState_Chase :  IEnemyState
 
         aiBase.transform.LookAt(aiBase.player);
         aiBase.agent.SetDestination(aiBase.player.position);
-
-   
-
-
     }
     public void Exit(AIBase aiBase)
     {
+        aiBase.agent.autoBraking = true;
 
         Debug.Log("Exiting Chase State");
     }

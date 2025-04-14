@@ -37890,8 +37890,6 @@ MonoBehaviour:
   roomOffset: 1
   wallVertical: {fileID: 3905889198844015587, guid: d83d7a5b8afe9b8468f3c3b7c37eeb3f, type: 3}
   wallHorizontal: {fileID: 7887518253945761346, guid: 4f1ee7246cb5d2a4d9aa03a4c0c9e13d, type: 3}
-  npcPrefab: {fileID: 8406845055882037674, guid: 36621476210b2c649b8aeea96b7c2587, type: 3}
-  waypointsPrefab: {fileID: 0}
   npcs:
   - {fileID: 0}
   - {fileID: 0}
@@ -38562,7 +38560,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 217
+    m_Bits: 201
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0

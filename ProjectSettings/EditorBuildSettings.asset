@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/TJ Stuff/Main Menu.unity
+    guid: a712b5aac73f1cf428b0b643726d3331
+  - enabled: 1
     path: Assets/TJ Stuff/GhostLight.unity
     guid: bdd0621495981ab4cbf1895c2556eb94
   m_configObjects:
