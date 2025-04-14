@@ -811,7 +811,7 @@ MonoBehaviour:
   ui: {fileID: 0}
   patrolPoints: []
   centrePoint: {fileID: 7799764094935584479}
-  range: 100
+  range: 50
   point: {x: 0, y: 0, z: 0}
   detectionRadius: 5
   playerDetected: 0
@@ -832,9 +832,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 2602231374797837610}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 50
+  m_Radius: 1
+  m_Speed: 4
+  m_Acceleration: 120
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

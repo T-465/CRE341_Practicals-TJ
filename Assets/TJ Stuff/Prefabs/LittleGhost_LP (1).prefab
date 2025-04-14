@@ -448,7 +448,7 @@ MonoBehaviour:
   ui: {fileID: 0}
   patrolPoints: []
   centrePoint: {fileID: 6965063081017625567}
-  range: 100
+  range: 50
   point: {x: 0, y: 0, z: 0}
   detectionRadius: 5
   playerDetected: 0
@@ -470,8 +470,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 3.5
-  m_Acceleration: 50
+  m_Speed: 4
+  m_Acceleration: 120
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -480,7 +480,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!65 &7587849758862978867
 BoxCollider:

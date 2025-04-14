@@ -67,6 +67,7 @@ public class Player : MonoBehaviour, IDamageable
         Time.timeScale = 0f;
         dungeonCreator.SetActive(false);
         ui.gameOverScreen.SetActive(true);
+        ui.Tally();
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
       

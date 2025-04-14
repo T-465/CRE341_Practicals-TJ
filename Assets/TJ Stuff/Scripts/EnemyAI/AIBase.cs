@@ -34,7 +34,7 @@ public class AIBase : MonoBehaviour
     [Header("Patrol")]
     public Transform[] patrolPoints;
     public Transform centrePoint;
-    public int range;
+    public int range = 50;
     public Vector3 point;
 
     [Header("Detection Settings")]
@@ -162,6 +162,7 @@ public class AIBase : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && !onCooldown && !isDead)
         {
+            agent.ResetPath();
             SetState(new EnemyState_Attack());
             onCooldown = true; // Start cooldown to prevent rapid attacks
             StartCoroutine(AttackCooldown());
