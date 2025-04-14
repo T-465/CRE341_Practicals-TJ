@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,110 +58,119 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] int roomWidthMin ;
     [SerializeField] int roomLengthMin ;
     [SerializeField] int maxIterations;
+    public bool paramsFound;
     
 
     public NavMeshSurface navMeshSurface;
     void Start()
     {
+        Debug.Log("DungeonCreator started");
+
         StartCoroutine(WaitForSingletonAndInitialize());
     }
 
     private IEnumerator WaitForSingletonAndInitialize()
     {
+        // Keep checking until the Singleton is found
         while (Singleton.singleton == null)
         {
-            Debug.LogWarning("Wait for Singleton");
+            Debug.LogWarning("Waiting for Singleton...");
             yield return null;
         }
 
+
         singleton = Singleton.singleton;
+        Debug.Log("Singleton found. Initializing DungeonCreator...");
+        paramsFound = false;
         start = false;
-
-
         InitializeDungeonParameters();
         StartCoroutine(CreateDungeon());
     }
 
     public void InitializeDungeonParameters()
     {
-        if (singleton == null)
-        {
-            singleton = GameObject.FindWithTag("singleton").GetComponent<Singleton>();
-        }
+
         if (singleton.levelsComplete == 0)
         {
             numberofProps = 10;
             numberofNPCs = 5;
-            numberofTorches = 5;
+            numberofTorches = 3;
             dungeonWidth = 50;
             dungeonLength = 40;
             roomWidthMin = 10;
-            roomLengthMin = 20;
-            maxIterations = 5;
+            roomLengthMin = 10;
+            maxIterations = 8;
+            paramsFound = true;
         }
     
         if (singleton.levelsComplete == 1)
         {
             numberofProps = 12;
             numberofNPCs = 6;
-            numberofTorches = 5;
+            numberofTorches = 4;
             dungeonWidth = 50;
             dungeonLength = 40;
             roomWidthMin = 12;
-            roomLengthMin = 22;
-            maxIterations = 6;
+            roomLengthMin = 15;
+            maxIterations = 10;
+            paramsFound = true;
         }
         else if (singleton.levelsComplete == 2)
         {
             numberofProps = 15;
             numberofNPCs = 8;
-            numberofTorches = 6;
+            numberofTorches = 5;
             dungeonWidth = 50;
             dungeonLength = 42;
-            roomWidthMin = 12;
-            roomLengthMin = 24;
-            maxIterations = 7;
+            roomWidthMin = 10;
+            roomLengthMin = 20;
+            maxIterations = 12;
+            paramsFound = true;
         
         }
         else if (singleton.levelsComplete == 3)
         {
             numberofProps = 18;
             numberofNPCs = 10;
-            numberofTorches = 8;
+            numberofTorches = 6;
             dungeonWidth = 50;
             dungeonLength = 40;
-            roomWidthMin = 14;
+            roomWidthMin = 10;
             roomLengthMin = 24;
-            maxIterations = 8;
+            maxIterations = 12;
+            paramsFound = true;
         }
         else if (singleton.levelsComplete == 4)
         {
             numberofProps = 20;
             numberofNPCs = 10;
-            numberofTorches = 10;
+            numberofTorches = 7;
             dungeonWidth = 50;
             dungeonLength = 45;
             roomWidthMin = 15;
             roomLengthMin = 25;
-            maxIterations = 9;
+            maxIterations = 14;
+            paramsFound = true;
         }
         else if (singleton.levelsComplete >= 5)
         {
             numberofProps = 20;
             numberofNPCs = 10;
-            numberofTorches = 10;
+            numberofTorches = 8;
             dungeonWidth = 50;
             dungeonLength = 50;
             roomWidthMin = 15;
             roomLengthMin = 25;
-            maxIterations = 9;
+            maxIterations = 15;
+            paramsFound = true;
         }
     }
 
     public IEnumerator CreateDungeon()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitUntil(() => paramsFound == true);
         DestroyAllChildren();
+        Debug.Log("Dungeon dung");
      
         DungeonGen generator = new DungeonGen(dungeonWidth, dungeonLength);
         var listOfRooms = generator.CalculateDungeon(maxIterations,
@@ -215,7 +225,7 @@ public class DungeonCreator : MonoBehaviour
 private void SpawnProps()
 {
     minDistanceFromWall = 3.5f;
-    minDistanceFromHatch = 1.0f;
+    minDistanceFromHatch = 2.0f;
 
    
     for (int i = 0; i < numberofProps; i++)
@@ -235,7 +245,6 @@ private void SpawnProps()
                 UnityEngine.Random.Range(0, dungeonLength)
             );
 
-            // Check distance from all wall positions
             foreach (var wallPosition in possibleWallHorizontalPosition)
             {
                 if (Vector3.Distance(randomPosition, wallPosition) < minDistanceFromWall)
@@ -317,13 +326,11 @@ private void SpawnProps()
                 }
             }
 
-            // Check distance from the hatch
             if (Vector3.Distance(randomPosition, hatchPosition) < minDistanceFromHatch)
             {
                 validPosition = false;
                 break;
             }
-             // Check distance from the props
             if (Vector3.Distance(randomPosition, propPosition) < minDistanceFromProp)
             {
                 validPosition = false;
@@ -331,8 +338,6 @@ private void SpawnProps()
             }
             if (validPosition && torches.Count > 0)
             {
-                
-                // Check distance from the other torches
                 foreach (var torch in torches)
                 {
                     torchPosition = torches[0].transform.position;
@@ -367,10 +372,10 @@ private void DestroyTorches()
 }
 public void SpawnPlayer()
 {
-    minDistanceFromWall = 5.0f;
+    minDistanceFromWall = 5f;
     minDistanceFromHatch = 1.0f;
-    minDistanceFromProp = 2.0f;
-    minDistanceFromTorch = 3.0f;
+    minDistanceFromProp = 1.0f;
+    minDistanceFromTorch = 1.0f;
 
     Vector3 randomPosition;
     bool validPosition;
@@ -406,7 +411,6 @@ public void SpawnPlayer()
             }
         }
 
-        // Check distance from the hatch
         if (validPosition && hatches.Count > 0)
         {
             Vector3 hatchPosition = hatches[0].transform.position;
@@ -416,7 +420,6 @@ public void SpawnPlayer()
             }
         }
 
-        // Check distance from the props
         if (validPosition && props.Count > 0)
         {
             foreach (var prop in props)
@@ -429,7 +432,6 @@ public void SpawnPlayer()
             }
         }
 
-        // Check distance from the torches
         if (validPosition && torches.Count > 0)
         {
             foreach (var torch in torches)
@@ -443,15 +445,11 @@ public void SpawnPlayer()
         }
 
     } while (!validPosition);
-    if (playerSpawn != null)
+    if (playerSpawn != null && validPosition)
     {
         Instantiate(playerSpawn, randomPosition, Quaternion.identity);
         Debug.Log($"Player spawned at {randomPosition}");
         start = true;
-    }
-    else
-    {
-        Debug.LogError("Player prefab not assigned");
     }
 }
 
@@ -645,18 +643,6 @@ private void DestroyPlayer()
             }
         }
     }
-       void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Start();
-    }
+   
 
 }

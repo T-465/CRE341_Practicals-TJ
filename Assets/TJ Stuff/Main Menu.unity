@@ -617,17 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ef5ce169a9001468a0ee3decccb5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &465893556 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9179468178778425934, guid: 81352970b0873a241b74a04d34628be0, type: 3}
-  m_PrefabInstance: {fileID: 1720803761}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3598c871567c9574c9bb7c75e94bc726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &706833369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,8 +1002,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 465893556}
-        m_TargetAssemblyTypeName: Singleton, Assembly-CSharp
+      - m_Target: {fileID: 432697187}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: GhostLight
         m_Mode: 1
         m_Arguments:

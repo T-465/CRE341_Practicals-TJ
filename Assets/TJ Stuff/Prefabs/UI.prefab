@@ -166,7 +166,7 @@ RectTransform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4714290629651852329}
+  m_Father: {fileID: 3914006181393195357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -299,7 +299,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3476005832948848295}
+  - {fileID: 4435455562804567068}
+  - {fileID: 8346254770093057389}
+  - {fileID: 4753326090943364784}
   m_Father: {fileID: 4714290629651852329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -588,7 +592,7 @@ RectTransform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4714290629651852329}
+  m_Father: {fileID: 3914006181393195357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1340,7 +1344,7 @@ RectTransform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4714290629651852329}
+  m_Father: {fileID: 3914006181393195357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1416,12 +1420,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6393853135528522248}
   - {fileID: 3914006181393195357}
-  - {fileID: 3476005832948848295}
-  - {fileID: 4435455562804567068}
-  - {fileID: 8346254770093057389}
-  - {fileID: 4753326090943364784}
+  - {fileID: 6393853135528522248}
   - {fileID: 7726601589422616218}
   m_Father: {fileID: 6271817613525176326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1548,6 +1548,7 @@ MonoBehaviour:
   levelScore: 0
   finalScoreText: {fileID: 4006110188452781805}
   singleton: {fileID: 0}
+  audioManager: {fileID: 0}
   loadingScreen: {fileID: 1262718844476228703}
   gameOverScreen: {fileID: 4587309286336309917}
   dungeonCreator: {fileID: 0}
@@ -1581,7 +1582,7 @@ RectTransform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4714290629651852329}
+  m_Father: {fileID: 3914006181393195357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

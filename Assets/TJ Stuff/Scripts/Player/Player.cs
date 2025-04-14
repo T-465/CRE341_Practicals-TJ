@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] public float speed;
     public CharacterController cc;
     public PlayerInput playerinput;
-    public GameObject dungeonCreator;
+
     public MouseLook mouseLook;
    
     public void Awake()
@@ -24,7 +24,12 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void Start()
     {
-        dungeonCreator = GameObject.FindWithTag("DunGen");
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        mouseLook = GetComponentInChildren<MouseLook>();
+        Time.timeScale = 1f;
+       
+
     }
     private void FixedUpdate()
     {
@@ -65,7 +70,6 @@ public class Player : MonoBehaviour, IDamageable
         speed = 0;
         cc.enabled = false;
         Time.timeScale = 0f;
-        dungeonCreator.SetActive(false);
         ui.gameOverScreen.SetActive(true);
         ui.Tally();
         UnityEngine.Cursor.lockState = CursorLockMode.None;
