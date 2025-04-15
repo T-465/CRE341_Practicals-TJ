@@ -11,19 +11,18 @@ public class HatchOpen : MonoBehaviour
 
     public GameObject[] ghosts;
     public bool allGhostsDead;
-
-    [System.Obsolete]
-    void Start()
+    
+      void Start()
     {
         animator = GetComponent<Animator>();
         animator.SetBool("Opening", false);
         if (singleton == null)
         {
-            singleton = FindObjectOfType<Singleton>();
+            singleton = FindFirstObjectByType<Singleton>();
         }
         if (audioManager == null)
         {
-            audioManager = FindObjectOfType<AudioManager>();
+            audioManager = FindFirstObjectByType<AudioManager>();
         }
         arrow.SetActive(false);
 
@@ -33,13 +32,16 @@ public class HatchOpen : MonoBehaviour
         ghosts = GameObject.FindGameObjectsWithTag("Ghost");
         if (ghosts.Length == 0 && allGhostsDead == false)
         {
-
-            audioManager.PlaySFX("Hatch Open");
+            if (audioManager.played == false)
+            {
+                audioManager.PlayHatch();
+            }
             arrow.SetActive(true);
             allGhostsDead = true;
         }
         else
         {
+            audioManager.played = false;
             allGhostsDead = false;
         }
     }

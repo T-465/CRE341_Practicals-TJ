@@ -76,6 +76,7 @@ public IEnumerator LoadScreen()
   }
   public void Tally()
   {
+    jumpscareScreen.SetActive(false);
     audioManager.PlayMusic("Dead Theme");
 
     gameUI.SetActive(false);

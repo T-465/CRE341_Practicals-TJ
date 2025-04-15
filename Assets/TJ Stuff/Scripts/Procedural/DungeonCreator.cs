@@ -95,10 +95,10 @@ public class DungeonCreator : MonoBehaviour
             numberofProps = 10;
             numberofNPCs = 5;
             numberofTorches = 3;
-            dungeonWidth = 50;
+            dungeonWidth = 55;
             dungeonLength = 40;
             roomWidthMin = 12;
-            roomLengthMin = 10;
+            roomLengthMin = 12;
             maxIterations = 8;
             paramsFound = true;
         }
@@ -108,8 +108,8 @@ public class DungeonCreator : MonoBehaviour
             numberofProps = 10;
             numberofNPCs = 6;
             numberofTorches = 4;
-            dungeonWidth = 50;
-            dungeonLength = 40;
+            dungeonWidth = 55;
+            dungeonLength = 45;
             roomWidthMin = 12;
             roomLengthMin = 15;
             maxIterations = 10;
@@ -121,8 +121,8 @@ public class DungeonCreator : MonoBehaviour
             numberofNPCs = 8;
             numberofTorches = 5;
             dungeonWidth = 50;
-            dungeonLength = 44;
-            roomWidthMin = 10;
+            dungeonLength = 50;
+            roomWidthMin = 15;
             roomLengthMin = 20;
             maxIterations = 12;
             paramsFound = true;
@@ -134,8 +134,8 @@ public class DungeonCreator : MonoBehaviour
             numberofNPCs = 10;
             numberofTorches = 6;
             dungeonWidth = 50;
-            dungeonLength = 40;
-            roomWidthMin = 10;
+            dungeonLength = 45;
+            roomWidthMin = 20;
             roomLengthMin = 20;
             maxIterations = 12;
             paramsFound = true;
@@ -147,7 +147,7 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 6;
             dungeonWidth = 50;
             dungeonLength = 45;
-            roomWidthMin = 15;
+            roomWidthMin = 20;
             roomLengthMin = 25;
             maxIterations = 14;
             paramsFound = true;
@@ -159,7 +159,7 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 8;
             dungeonWidth = 50;
             dungeonLength = 50;
-            roomWidthMin = 15;
+            roomWidthMin = 30;
             roomLengthMin = 25;
             maxIterations = 15;
             paramsFound = true;

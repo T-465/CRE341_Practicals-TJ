@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource;
     public AudioSource sfxSource;
+    public bool played;
 
 
     private void Awake()
@@ -25,7 +26,7 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Start();
     }
@@ -46,6 +47,12 @@ public class AudioManager : MonoBehaviour
         
 
     }
+    public void PlayHatch()
+    {
+        PlaySFX("Hatch Open");
+        played = true;
+
+    }
     public void PlayMusic (string name)
     {
         Sound s = System.Array.Find(musicSounds, sound => sound.name == name);
@@ -59,11 +66,6 @@ public class AudioManager : MonoBehaviour
         if (s == null) return;
         sfxSource.clip = s.clip;
         sfxSource.Play();
-    }
-    private void Update()
-    {
-        
-
     }
        void OnEnable()
     {

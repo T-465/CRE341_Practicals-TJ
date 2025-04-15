@@ -59,6 +59,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a83d4e6680c45b748ab5101c82e33ddc, type: 3}
   musicSource: {fileID: 8578352050733717509}
   sfxSource: {fileID: 5448856593681454860}
+  played: 0
 --- !u!1 &3399068194882488161
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,13 +234,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 106
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
