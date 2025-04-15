@@ -7,5 +7,10 @@ public class MainMenu : MonoBehaviour
        SceneManager.LoadScene("GhostLight");
        
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game");
+    }
  
 }

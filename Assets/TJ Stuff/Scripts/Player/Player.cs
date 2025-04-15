@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] public float speed;
     public CharacterController cc;
     public PlayerInput playerinput;
+    public AudioSource boo;
 
     public MouseLook mouseLook;
    
@@ -28,6 +29,11 @@ public class Player : MonoBehaviour, IDamageable
         UnityEngine.Cursor.visible = false;
         mouseLook = GetComponentInChildren<MouseLook>();
         Time.timeScale = 1f;
+        if (ui == null)
+        {
+            ui = GameObject.Find("UI").GetComponent<UI>();
+        }
+        
        
 
     }
@@ -51,9 +57,9 @@ public class Player : MonoBehaviour, IDamageable
     #region Damage
     public void TakeDamage(int damage)
     {
+    
         if (playerHealth <= 0)
         {
-            ui.Jumpscare();
             return; 
         }
         playerHealth -= damage;
@@ -63,6 +69,12 @@ public class Player : MonoBehaviour, IDamageable
         if (playerHealth <= 0)
         {
             OnGameOver();
+        }
+        else
+        {
+                boo.Play();
+                ui.JumpscareStart();
+
         }
     }
     public void OnGameOver() 

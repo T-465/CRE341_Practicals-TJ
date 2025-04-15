@@ -56,7 +56,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] int dungeonWidth;
     [SerializeField] int dungeonLength ;
     [SerializeField] int roomWidthMin ;
-    [SerializeField] int roomLengthMin ;
+    [SerializeField] int roomLengthMin;
     [SerializeField] int maxIterations;
     public bool paramsFound;
     
@@ -97,7 +97,7 @@ public class DungeonCreator : MonoBehaviour
             numberofTorches = 3;
             dungeonWidth = 50;
             dungeonLength = 40;
-            roomWidthMin = 10;
+            roomWidthMin = 12;
             roomLengthMin = 10;
             maxIterations = 8;
             paramsFound = true;
@@ -105,7 +105,7 @@ public class DungeonCreator : MonoBehaviour
     
         if (singleton.levelsComplete == 1)
         {
-            numberofProps = 12;
+            numberofProps = 10;
             numberofNPCs = 6;
             numberofTorches = 4;
             dungeonWidth = 50;
@@ -121,7 +121,7 @@ public class DungeonCreator : MonoBehaviour
             numberofNPCs = 8;
             numberofTorches = 5;
             dungeonWidth = 50;
-            dungeonLength = 42;
+            dungeonLength = 44;
             roomWidthMin = 10;
             roomLengthMin = 20;
             maxIterations = 12;
@@ -136,15 +136,15 @@ public class DungeonCreator : MonoBehaviour
             dungeonWidth = 50;
             dungeonLength = 40;
             roomWidthMin = 10;
-            roomLengthMin = 24;
+            roomLengthMin = 20;
             maxIterations = 12;
             paramsFound = true;
         }
         else if (singleton.levelsComplete == 4)
         {
-            numberofProps = 20;
+            numberofProps = 18;
             numberofNPCs = 10;
-            numberofTorches = 7;
+            numberofTorches = 6;
             dungeonWidth = 50;
             dungeonLength = 45;
             roomWidthMin = 15;
@@ -198,11 +198,12 @@ public class DungeonCreator : MonoBehaviour
         DestroyTorches();
         DestroyPlayer();
        
-        navMeshSurface.BuildNavMesh();
+        
         SpawnNPCs();
         SpawnHatch();
         SpawnProps();
         SpawnTorches();
+        navMeshSurface.BuildNavMesh();
         SpawnPlayer();
     
     }
@@ -283,9 +284,9 @@ private void SpawnProps()
   public void SpawnTorches()
 {
     minDistanceFromWall = 5.0f;
-    minDistanceFromHatch = 5.0f;
+    minDistanceFromHatch = 4.0f;
     minDistanceFromProp = 2.0f;
-    minDistanceFromTorch = 10.0f;
+    minDistanceFromTorch = 7.0f;
  
    
     for (int i = 0; i < numberofTorches; i++)
@@ -373,7 +374,7 @@ private void DestroyTorches()
 public void SpawnPlayer()
 {
     minDistanceFromWall = 5.5f;
-    minDistanceFromHatch = 0.2f;
+    minDistanceFromHatch = 0f;
     minDistanceFromProp = 1.0f;
     minDistanceFromTorch = 1.0f;
 

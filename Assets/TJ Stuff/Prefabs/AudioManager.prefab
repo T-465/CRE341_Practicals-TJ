@@ -54,7 +54,9 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b36884a9e4ebe8040922e3e94a08900d, type: 3}
   - name: Dead Theme
     clip: {fileID: 8300000, guid: 0edf1a6b9a38baf45810a227cde6d21e, type: 3}
-  sfxSounds: []
+  sfxSounds:
+  - name: Hatch Open
+    clip: {fileID: 8300000, guid: a83d4e6680c45b748ab5101c82e33ddc, type: 3}
   musicSource: {fileID: 8578352050733717509}
   sfxSource: {fileID: 5448856593681454860}
 --- !u!1 &3399068194882488161
@@ -231,7 +233,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

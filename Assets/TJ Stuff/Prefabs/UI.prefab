@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 3549034439135641528}
   - component: {fileID: 6613990842171255504}
   - component: {fileID: 5987960846055064589}
+  - component: {fileID: 1868429186908169571}
   m_Layer: 5
   m_Name: Jumpscare
   m_TagString: Untagged
@@ -775,6 +776,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &1868429186908169571
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5145816285176544477}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73ef6b35a2bbff741a9500df3b66010e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5239942974048320553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,9 +1519,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3914006181393195357}
-  - {fileID: 3549034439135641528}
   - {fileID: 6393853135528522248}
   - {fileID: 7726601589422616218}
+  - {fileID: 3549034439135641528}
   m_Father: {fileID: 6271817613525176326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
