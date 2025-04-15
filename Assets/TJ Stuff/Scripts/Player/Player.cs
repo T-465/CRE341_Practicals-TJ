@@ -53,6 +53,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (playerHealth <= 0)
         {
+            ui.Jumpscare();
             return; 
         }
         playerHealth -= damage;

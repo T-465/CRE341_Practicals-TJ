@@ -20,6 +20,7 @@ public class UI : MonoBehaviour
     public GameObject loadingScreen;
     public GameObject gameOverScreen;
     public DungeonCreator dungeonCreator;
+    public GameObject jumpscareScreen;
 
 public void Awake() 
 {
@@ -27,6 +28,7 @@ public void Awake()
   dungeonCreator = GameObject.FindWithTag("DunGen")?.GetComponent<DungeonCreator>();
   gameOverScreen.SetActive(false);
   loadingScreen.SetActive(true);
+  jumpscareScreen.SetActive(false);
 
   StartCoroutine(LoadScreen());
 }
@@ -95,6 +97,22 @@ public IEnumerator LoadScreen()
       SceneManager.LoadScene("Main Menu");
     
         
+    }
+    public void JumpscareStart()
+    {
+    StartCoroutine(Jumpscare());
+
+  
+    }
+    public IEnumerator Jumpscare()
+    {
+       jumpscareScreen.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        jumpscareScreen.SetActive(false);
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 

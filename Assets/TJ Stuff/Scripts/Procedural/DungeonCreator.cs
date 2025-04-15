@@ -372,8 +372,8 @@ private void DestroyTorches()
 }
 public void SpawnPlayer()
 {
-    minDistanceFromWall = 5f;
-    minDistanceFromHatch = 1.0f;
+    minDistanceFromWall = 5.5f;
+    minDistanceFromHatch = 0.2f;
     minDistanceFromProp = 1.0f;
     minDistanceFromTorch = 1.0f;
 

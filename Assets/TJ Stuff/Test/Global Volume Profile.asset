@@ -17,23 +17,23 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   threshold:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.9
   intensity:
-    m_OverrideState: 0
-    m_Value: 34.64
+    m_OverrideState: 1
+    m_Value: 3.2
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
   clamp:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.91823894, g: 0.34361765, b: 0.34361765, a: 1}
+    m_Value: {r: 0, g: 0.8553459, b: 0.12219221, a: 1}
   highQualityFiltering:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   downscale:
     m_OverrideState: 0
     m_Value: 0
@@ -102,10 +102,10 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 9
+    m_Value: 8
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.5
   response:
     m_OverrideState: 0
     m_Value: 1
@@ -127,7 +127,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.35
+    m_Value: 0.216
 --- !u!114 &-3034116365041255517
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -143,13 +143,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 0
-    m_Value: {x: 0.94730437, y: 0.97667015, z: 1, w: 0}
+    m_Value: {x: 0.956252, y: 0.94276667, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9207974, y: 0.9603991, z: 1, w: 0}
+    m_Value: {x: 0.82778, y: 0.8518008, z: 1, w: -0.23928191}
   gain:
     m_OverrideState: 0
-    m_Value: {x: 0.8704282, y: 1, z: 0.8717196, w: 0}
+    m_Value: {x: 0.79865724, y: 1, z: 0.71193266, w: -0.35227636}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,13 +187,13 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: -5
+    m_Value: 2
   colorFilter:
-    m_OverrideState: 1
-    m_Value: {r: 0.54346895, g: 0.43592018, b: 0.5849056, a: 1}
-  hueShift:
     m_OverrideState: 0
-    m_Value: -7
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    m_OverrideState: 1
+    m_Value: -2
   saturation:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 100
