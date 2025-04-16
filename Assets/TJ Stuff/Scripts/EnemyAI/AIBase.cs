@@ -5,7 +5,6 @@ using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 
 public class AIBase : MonoBehaviour
@@ -165,7 +164,7 @@ public class AIBase : MonoBehaviour
             agent.velocity = Vector3.zero;
             agent.ResetPath();
             SetState(new EnemyState_Attack());
-            onCooldown = true; // Start cooldown to prevent rapid attacks
+            onCooldown = true;
             StartCoroutine(AttackCooldown());
         }
     }

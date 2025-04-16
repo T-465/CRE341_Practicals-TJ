@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+
 
 public class Flashlight : MonoBehaviour, ISwitchable
 {
@@ -17,7 +16,6 @@ public class Flashlight : MonoBehaviour, ISwitchable
     public bool flashlightdead;
     
 
-   // public AudioSource click;
     private void Start()
     {
         flashlightfull = true;
@@ -27,7 +25,6 @@ public class Flashlight : MonoBehaviour, ISwitchable
     public void Update()
     {
         #region Flashlight
-        // Check for player input and toggle the flashlight
         if (FlashLight.enabled == true)
         {
             flashlighton = true;
@@ -93,8 +90,6 @@ public class Flashlight : MonoBehaviour, ISwitchable
     }
     public void Toggle()
     {
-     // Flashlight sound
-     // click.Play();
       FlashLight.enabled = !FlashLight.enabled;
     }
 
