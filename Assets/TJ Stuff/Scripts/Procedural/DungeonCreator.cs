@@ -51,7 +51,7 @@ public class DungeonCreator : MonoBehaviour
     public float minDistanceFromProp;
     public float minDistanceFromTorch;
     [SerializeField] int numberofProps;
-    [SerializeField] int numberofNPCs ;
+    public int numberofNPCs;
     [SerializeField] int numberofTorches;
     [SerializeField] int dungeonWidth;
     [SerializeField] int dungeonLength ;

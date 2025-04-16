@@ -49,12 +49,12 @@ public IEnumerator LoadScreen()
         currentScore = 0;
         healthPoints = 10;
         health.text = "Health: " + healthPoints.ToString();
-        score.text = "x" + currentScore.ToString();
+        score.text = "???";
     }
   public void AddScore(int v)
   {
     currentScore += v;
-    score.text = "x" + currentScore.ToString();
+    score.text = currentScore.ToString()+ "/" + singleton.ghostsTotal.ToString();;
     singleton.AddSingleton(v);
   }
     public void LoseHealth(int v)

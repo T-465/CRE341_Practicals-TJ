@@ -43,6 +43,7 @@ public class AIBase : MonoBehaviour
     [Header("Audio")]
     public Sound[] audioClips;
     public AudioSource audioSource;
+    public AudioSource directionalWoo;
 
 
     private void Awake()
@@ -65,7 +66,7 @@ public class AIBase : MonoBehaviour
     }
     public IEnumerator WaitForPlayer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.3f);
           if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;

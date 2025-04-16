@@ -9,6 +9,8 @@ public class Singleton : MonoBehaviour
     public int levelsComplete;
     public DungeonCreator dungeonCreator;
 
+    public int ghostsTotal;
+
 
 
     void Awake()
@@ -44,6 +46,10 @@ public class Singleton : MonoBehaviour
             ui = GameObject.Find("UI")?.GetComponent<UI>();
         }
 
+    }
+    void Update()
+    {
+        ghostsTotal = dungeonCreator.numberofNPCs;
     }
 
     void OnEnable()

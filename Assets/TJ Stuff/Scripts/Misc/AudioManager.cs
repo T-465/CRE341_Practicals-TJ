@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource;
     public AudioSource sfxSource;
-    public bool played;
+
 
 
     private void Awake()
@@ -47,12 +47,7 @@ public class AudioManager : MonoBehaviour
         
 
     }
-    public void PlayHatch()
-    {
-        PlaySFX("Hatch Open");
-        played = true;
-
-    }
+ 
     public void PlayMusic (string name)
     {
         Sound s = System.Array.Find(musicSounds, sound => sound.name == name);

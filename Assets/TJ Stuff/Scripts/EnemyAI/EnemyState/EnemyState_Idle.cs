@@ -10,6 +10,7 @@ public class EnemyState_Idle : IEnemyState
     public void Enter(AIBase aiBase)
     {
         Debug.Log("Entering Idle State");
+        aiBase.directionalWoo.PlayDelayed(30f);
 
     }
 
@@ -33,6 +34,7 @@ public class EnemyState_Idle : IEnemyState
 
     public void Exit(AIBase aIBase)
     {
+        aIBase.directionalWoo.Stop();   
         Debug.Log("Exiting Idle State");
     }
 

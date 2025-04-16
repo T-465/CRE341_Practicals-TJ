@@ -6,7 +6,6 @@ public class HatchOpen : MonoBehaviour
 {
     public Animator animator;
     public Singleton singleton;
-    public AudioManager audioManager;
     public GameObject arrow;
 
     public GameObject[] ghosts;
@@ -20,10 +19,7 @@ public class HatchOpen : MonoBehaviour
         {
             singleton = FindFirstObjectByType<Singleton>();
         }
-        if (audioManager == null)
-        {
-            audioManager = FindFirstObjectByType<AudioManager>();
-        }
+
         arrow.SetActive(false);
 
     }
@@ -32,16 +28,12 @@ public class HatchOpen : MonoBehaviour
         ghosts = GameObject.FindGameObjectsWithTag("Ghost");
         if (ghosts.Length == 0 && allGhostsDead == false)
         {
-            if (audioManager.played == false)
-            {
-                audioManager.PlayHatch();
-            }
             arrow.SetActive(true);
             allGhostsDead = true;
         }
         else
         {
-            audioManager.played = false;
+      
             allGhostsDead = false;
         }
     }
